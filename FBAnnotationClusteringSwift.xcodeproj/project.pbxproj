@@ -8,12 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		850D2922DCE040C383968E2F /* Pods_FBAnnotationClusteringSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB131D383988B616E6AA6ADE /* Pods_FBAnnotationClusteringSwift_Example.framework */; };
+		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
+		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AB9B3BD1E096A2900E3A112 /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3A71E096A2100E3A112 /* FBAnnotation.swift */; };
+		9AB9B3BE1E096A2900E3A112 /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3A81E096A2100E3A112 /* FBAnnotationCluster.swift */; };
+		9AB9B3BF1E096A2900E3A112 /* FBAnnotationClusterTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3A91E096A2100E3A112 /* FBAnnotationClusterTemplate.swift */; };
+		9AB9B3C01E096A2900E3A112 /* FBAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AA1E096A2100E3A112 /* FBAnnotationClusterView.swift */; };
+		9AB9B3C11E096A2900E3A112 /* FBAnnotationClusterViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */; };
+		9AB9B3C21E096A2900E3A112 /* FBBoundingBox+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */; };
+		9AB9B3C31E096A2900E3A112 /* FBBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */; };
+		9AB9B3C41E096A2900E3A112 /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */; };
+		9AB9B3C51E096A2900E3A112 /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */; };
+		9AB9B3C61E096A2900E3A112 /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */; };
+		9AB9B3C71E096A2900E3A112 /* FBZoomLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */; };
+		9AB9B3CA1E096AC900E3A112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1225981C6E313400A5E91D /* Main.storyboard */; };
+		9AB9B3CB1E096ACE00E3A112 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1225961C6E313400A5E91D /* LaunchScreen.xib */; };
 		FE07C7E91C6E42EE00B219A5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE07C7E81C6E42EE00B219A5 /* Images.xcassets */; };
 		FE1225931C6E312200A5E91D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1225901C6E312200A5E91D /* AppDelegate.swift */; };
 		FE1225941C6E312200A5E91D /* FBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1225911C6E312200A5E91D /* FBViewController.swift */; };
-		FE12259A1C6E313400A5E91D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1225961C6E313400A5E91D /* LaunchScreen.xib */; };
-		FE12259B1C6E313400A5E91D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1225981C6E313400A5E91D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +37,30 @@
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
 			remoteInfo = FBAnnotationClusteringSwift;
 		};
+		9AB9B39E1E0969F100E3A112 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AB9B3981E0969F100E3A112;
+			remoteInfo = FBAnnotationClusteringSwift;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9AB9B3A51E0969F100E3A112 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		19057509F538F5BE8B2B14F5 /* Pods-FBAnnotationClusteringSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBAnnotationClusteringSwift_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBAnnotationClusteringSwift_Example/Pods-FBAnnotationClusteringSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
-		5DDEB7EA347330812AE0DF89 /* Pods-FBAnnotationClusteringSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBAnnotationClusteringSwift_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBAnnotationClusteringSwift_Example/Pods-FBAnnotationClusteringSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* FBAnnotationClusteringSwift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBAnnotationClusteringSwift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* FBAnnotationClusteringSwift_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBAnnotationClusteringSwift_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,8 +68,21 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F27E8C19C5A405B5072D1D0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		8BFE2416CCF84B3F2AFDD15B /* FBAnnotationClusteringSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FBAnnotationClusteringSwift.podspec; path = ../FBAnnotationClusteringSwift.podspec; sourceTree = "<group>"; };
+		9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBAnnotationClusteringSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClusteringSwift.h; sourceTree = "<group>"; };
+		9AB9B39C1E0969F100E3A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AB9B3A71E096A2100E3A112 /* FBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotation.swift; sourceTree = "<group>"; };
+		9AB9B3A81E096A2100E3A112 /* FBAnnotationCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationCluster.swift; sourceTree = "<group>"; };
+		9AB9B3A91E096A2100E3A112 /* FBAnnotationClusterTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterTemplate.swift; sourceTree = "<group>"; };
+		9AB9B3AA1E096A2100E3A112 /* FBAnnotationClusterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterView.swift; sourceTree = "<group>"; };
+		9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterViewConfiguration.swift; sourceTree = "<group>"; };
+		9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FBBoundingBox+MapKit.swift"; sourceTree = "<group>"; };
+		9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBoundingBox.swift; sourceTree = "<group>"; };
+		9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
+		9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
+		9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
+		9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBZoomLevel.swift; sourceTree = "<group>"; };
 		9FA0BD969C7743DC2F85985B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		BB131D383988B616E6AA6ADE /* Pods_FBAnnotationClusteringSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBAnnotationClusteringSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE07C7E81C6E42EE00B219A5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE1225901C6E312200A5E91D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE1225911C6E312200A5E91D /* FBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBViewController.swift; sourceTree = "<group>"; };
@@ -50,11 +95,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				850D2922DCE040C383968E2F /* Pods_FBAnnotationClusteringSwift_Example.framework in Frameworks */,
+				9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		607FACE21AFB9204008FA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB9B3951E0969F100E3A112 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -67,11 +119,12 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				9AB9B3A61E096A2100E3A112 /* Classes */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for FBAnnotationClusteringSwift */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				9AB9B39A1E0969F100E3A112 /* FBAnnotationClusteringSwift */,
 				607FACD11AFB9204008FA782 /* Products */,
-				F714F91127D463A17DBF9699 /* Pods */,
 				A7A81413511ACDBE656A98B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -81,6 +134,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* FBAnnotationClusteringSwift_Example.app */,
 				607FACE51AFB9204008FA782 /* FBAnnotationClusteringSwift_Tests.xctest */,
+				9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,40 +188,67 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		9AB9B39A1E0969F100E3A112 /* FBAnnotationClusteringSwift */ = {
+			isa = PBXGroup;
+			children = (
+				9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */,
+				9AB9B39C1E0969F100E3A112 /* Info.plist */,
+			);
+			path = FBAnnotationClusteringSwift;
+			sourceTree = "<group>";
+		};
+		9AB9B3A61E096A2100E3A112 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9AB9B3A71E096A2100E3A112 /* FBAnnotation.swift */,
+				9AB9B3A81E096A2100E3A112 /* FBAnnotationCluster.swift */,
+				9AB9B3A91E096A2100E3A112 /* FBAnnotationClusterTemplate.swift */,
+				9AB9B3AA1E096A2100E3A112 /* FBAnnotationClusterView.swift */,
+				9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */,
+				9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */,
+				9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */,
+				9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */,
+				9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */,
+				9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */,
+				9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		A7A81413511ACDBE656A98B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BB131D383988B616E6AA6ADE /* Pods_FBAnnotationClusteringSwift_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F714F91127D463A17DBF9699 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5DDEB7EA347330812AE0DF89 /* Pods-FBAnnotationClusteringSwift_Example.debug.xcconfig */,
-				19057509F538F5BE8B2B14F5 /* Pods-FBAnnotationClusteringSwift_Example.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9AB9B3961E0969F100E3A112 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		607FACCF1AFB9204008FA782 /* FBAnnotationClusteringSwift_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "FBAnnotationClusteringSwift_Example" */;
 			buildPhases = (
-				E8AE06806BE7FD0D3826DDCB /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				3ED4C66F0D00D409A52C0A49 /* [CP] Embed Pods Frameworks */,
-				2132C8A3560947ED1CEA7C22 /* [CP] Copy Pods Resources */,
+				9AB9B3A51E0969F100E3A112 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9AB9B39F1E0969F100E3A112 /* PBXTargetDependency */,
 			);
 			name = FBAnnotationClusteringSwift_Example;
 			productName = FBAnnotationClusteringSwift;
@@ -192,6 +273,24 @@
 			productReference = 607FACE51AFB9204008FA782 /* FBAnnotationClusteringSwift_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		9AB9B3981E0969F100E3A112 /* FBAnnotationClusteringSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AB9B3A41E0969F100E3A112 /* Build configuration list for PBXNativeTarget "FBAnnotationClusteringSwift" */;
+			buildPhases = (
+				9AB9B3941E0969F100E3A112 /* Sources */,
+				9AB9B3951E0969F100E3A112 /* Frameworks */,
+				9AB9B3961E0969F100E3A112 /* Headers */,
+				9AB9B3971E0969F100E3A112 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FBAnnotationClusteringSwift;
+			productName = FBAnnotationClusteringSwift;
+			productReference = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +310,10 @@
 						LastSwiftMigration = 0800;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
+					9AB9B3981E0969F100E3A112 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "FBAnnotationClusteringSwift" */;
@@ -228,6 +331,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* FBAnnotationClusteringSwift_Example */,
 				607FACE41AFB9204008FA782 /* FBAnnotationClusteringSwift_Tests */,
+				9AB9B3981E0969F100E3A112 /* FBAnnotationClusteringSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -238,8 +342,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE07C7E91C6E42EE00B219A5 /* Images.xcassets in Resources */,
-				FE12259B1C6E313400A5E91D /* Main.storyboard in Resources */,
-				FE12259A1C6E313400A5E91D /* LaunchScreen.xib in Resources */,
+				9AB9B3CB1E096ACE00E3A112 /* LaunchScreen.xib in Resources */,
+				9AB9B3CA1E096AC900E3A112 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,55 +354,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9AB9B3971E0969F100E3A112 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2132C8A3560947ED1CEA7C22 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBAnnotationClusteringSwift_Example/Pods-FBAnnotationClusteringSwift_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3ED4C66F0D00D409A52C0A49 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBAnnotationClusteringSwift_Example/Pods-FBAnnotationClusteringSwift_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E8AE06806BE7FD0D3826DDCB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		607FACCC1AFB9204008FA782 /* Sources */ = {
@@ -318,6 +381,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9AB9B3941E0969F100E3A112 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB9B3C61E096A2900E3A112 /* FBQuadTreeNode.swift in Sources */,
+				9AB9B3C01E096A2900E3A112 /* FBAnnotationClusterView.swift in Sources */,
+				9AB9B3C11E096A2900E3A112 /* FBAnnotationClusterViewConfiguration.swift in Sources */,
+				9AB9B3C71E096A2900E3A112 /* FBZoomLevel.swift in Sources */,
+				9AB9B3C31E096A2900E3A112 /* FBBoundingBox.swift in Sources */,
+				9AB9B3BD1E096A2900E3A112 /* FBAnnotation.swift in Sources */,
+				9AB9B3BE1E096A2900E3A112 /* FBAnnotationCluster.swift in Sources */,
+				9AB9B3BF1E096A2900E3A112 /* FBAnnotationClusterTemplate.swift in Sources */,
+				9AB9B3C21E096A2900E3A112 /* FBBoundingBox+MapKit.swift in Sources */,
+				9AB9B3C41E096A2900E3A112 /* FBClusteringManager.swift in Sources */,
+				9AB9B3C51E096A2900E3A112 /* FBQuadTree.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -325,6 +406,11 @@
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* FBAnnotationClusteringSwift_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+		9AB9B39F1E0969F100E3A112 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AB9B3981E0969F100E3A112 /* FBAnnotationClusteringSwift */;
+			targetProxy = 9AB9B39E1E0969F100E3A112 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -437,7 +523,6 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DDEB7EA347330812AE0DF89 /* Pods-FBAnnotationClusteringSwift_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -454,7 +539,6 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19057509F538F5BE8B2B14F5 /* Pods-FBAnnotationClusteringSwift_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -506,6 +590,58 @@
 			};
 			name = Release;
 		};
+		9AB9B3A21E0969F100E3A112 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FBAnnotationClusteringSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ngti.FBAnnotationClusteringSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9AB9B3A31E0969F100E3A112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FBAnnotationClusteringSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ngti.FBAnnotationClusteringSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -535,6 +671,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9AB9B3A41E0969F100E3A112 /* Build configuration list for PBXNativeTarget "FBAnnotationClusteringSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AB9B3A21E0969F100E3A112 /* Debug */,
+				9AB9B3A31E0969F100E3A112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
