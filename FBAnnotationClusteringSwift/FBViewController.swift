@@ -86,6 +86,22 @@ extension FBViewController : MKMapViewDelegate {
 
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
+    {
+        guard let annotationCluster = view.annotation as? FBAnnotationCluster else
+        {
+            return
+        }
+        
+        var region = annotationCluster.region
+        
+        // Make span a bit bigger so there are no points on the edges of the map
+        let smallSpan = region.span
+        region.span = MKCoordinateSpan(latitudeDelta: smallSpan.latitudeDelta * 1.3, longitudeDelta: smallSpan.longitudeDelta * 1.3)
+        
+        self.mapView.setRegion(region, animated: true)
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         var reuseId = ""

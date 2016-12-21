@@ -118,9 +118,7 @@ public class FBClusteringManager {
 						latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
 						longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
 					)
-					let cluster = FBAnnotationCluster()
-					cluster.coordinate = coordinate
-					cluster.annotations = annotations
+					let cluster = FBAnnotationCluster(coordinate: coordinate, title: nil, subtitle: nil, annotations: annotations)
 					clusteredAnnotations.append(cluster)
 				}
             }
