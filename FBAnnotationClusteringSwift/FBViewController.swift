@@ -17,7 +17,23 @@ class FBViewController: UIViewController {
     let numberOfLocations = 1000
     
     let clusteringManager = FBClusteringManager()
-	let configuration = FBAnnotationClusterViewConfiguration.default()
+    
+    lazy var configuration: FBAnnotationClusterViewConfiguration =
+    {
+        var smallTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 0, upper: 6)), sideLength: 48)
+        smallTemplate.borderWidth = 2
+        smallTemplate.fontSize = 13
+        
+        var mediumTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 6, upper: 15)), sideLength: 56)
+        mediumTemplate.borderWidth = 3
+        mediumTemplate.fontSize = 13
+        
+        var largeTemplate = FBAnnotationClusterTemplate(range: nil, sideLength: 64)
+        largeTemplate.borderWidth = 4
+        largeTemplate.fontSize = 13
+        
+        return FBAnnotationClusterViewConfiguration(templates: [smallTemplate, mediumTemplate], defaultTemplate: largeTemplate)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +61,11 @@ class FBViewController: UIViewController {
 extension FBViewController : FBClusteringManagerDelegate {
  
     func cellSizeFactor(forCoordinator coordinator:FBClusteringManager) -> CGFloat {
-        return 1.0
+        return 1.5
+    }
+    
+    func cellSize(forCoordinator coordinator: FBClusteringManager, zoomLevel: ZoomLevel) -> CGFloat {
+        return 64
     }
 }
 

@@ -9,13 +9,13 @@
 import Foundation
 import MapKit
 
-typealias ZoomLevel = Int
-extension ZoomLevel {
+public typealias ZoomLevel = Int
+public extension ZoomLevel {
 
 	init(scale: MKZoomScale) {
 		let totalTilesAtMaxZoom = MKMapSizeWorld.width / 256.0
 		let zoomLevelAtMaxZoom = Int(log2(totalTilesAtMaxZoom))
-		let floorLog2ScaleFloat = floor(log2f(Float(scale))) + 0.5
+		let floorLog2ScaleFloat = floor(log2f(Float(scale)) + 0.5)
 
 		if !floorLog2ScaleFloat.isInfinite {
 			let sum = zoomLevelAtMaxZoom + Int(floorLog2ScaleFloat)

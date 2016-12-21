@@ -11,6 +11,7 @@ import MapKit
 
 public protocol FBClusteringManagerDelegate: NSObjectProtocol {
     func cellSizeFactor(forCoordinator coordinator: FBClusteringManager) -> CGFloat
+    func cellSize(forCoordinator coordinator: FBClusteringManager, zoomLevel: ZoomLevel) -> CGFloat
 }
 
 public class FBClusteringManager {
@@ -67,8 +68,11 @@ public class FBClusteringManager {
     public func clusteredAnnotations(withinMapRect rect:MKMapRect, zoomScale: Double) -> [MKAnnotation] {
         guard !zoomScale.isInfinite else { return [] }
         
-        var cellSize = ZoomLevel(MKZoomScale(zoomScale)).cellSize()
+        let zoomLevel = ZoomLevel(MKZoomScale(zoomScale))
+        var cellSize = zoomLevel.cellSize()
+        
         if let delegate = delegate {
+            cellSize = delegate.cellSize(forCoordinator: self, zoomLevel: zoomLevel)
 			cellSize *= delegate.cellSizeFactor(forCoordinator: self)
         }
 

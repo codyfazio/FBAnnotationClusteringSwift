@@ -15,7 +15,7 @@ open class FBQuadTree {
 
 	// MARK: Internal functions
     
-    func insert(annotation: MKAnnotation) -> Bool {
+    @discardableResult func insert(annotation: MKAnnotation) -> Bool {
         return insert(annotation: annotation, toNode:rootNode)
     }
 
@@ -29,7 +29,7 @@ open class FBQuadTree {
 
 	// MARK: Private functions
 
-	private func insert(annotation: MKAnnotation, toNode node: FBQuadTreeNode) -> Bool {
+	@discardableResult private func insert(annotation: MKAnnotation, toNode node: FBQuadTreeNode) -> Bool {
 		if !node.boundingBox.contains(coordinate: annotation.coordinate) {
 			return false
 		}
