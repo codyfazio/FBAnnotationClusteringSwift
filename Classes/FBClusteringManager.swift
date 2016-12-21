@@ -65,10 +65,9 @@ public class FBClusteringManager {
 		return annotations
 	}
 
-    public func clusteredAnnotations(withinMapRect rect:MKMapRect, zoomScale: Double) -> [MKAnnotation] {
-        guard !zoomScale.isInfinite else { return [] }
+    public func clusteredAnnotations(withinMapRect rect:MKMapRect, size mapSize: CGSize, zoomLevel: ZoomLevel) -> [MKAnnotation] {
+        guard zoomLevel < UInt.max else { return [] }
         
-        let zoomLevel = ZoomLevel(MKZoomScale(zoomScale))
         var cellSize = zoomLevel.cellSize()
         
         if let delegate = delegate {
@@ -76,7 +75,9 @@ public class FBClusteringManager {
 			cellSize *= delegate.cellSizeFactor(forCoordinator: self)
         }
 
-        let scaleFactor = zoomScale / Double(cellSize)
+        let scale = Double(mapSize.width) / rect.size.width
+        
+        let scaleFactor = scale/Double(cellSize)
         
         let minX = Int(floor(MKMapRectGetMinX(rect) * scaleFactor))
         let maxX = Int(floor(MKMapRectGetMaxX(rect) * scaleFactor))

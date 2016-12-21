@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9A2A16971E0A9718009350AB /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */; };
 		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
 		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,6 +69,9 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F27E8C19C5A405B5072D1D0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		8BFE2416CCF84B3F2AFDD15B /* FBAnnotationClusteringSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FBAnnotationClusteringSwift.podspec; path = ../FBAnnotationClusteringSwift.podspec; sourceTree = "<group>"; };
+		9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
+		9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
+		9A2A16981E0A9750009350AB /* FBAnnotationClusteringSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBAnnotationClusteringSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBAnnotationClusteringSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClusteringSwift.h; sourceTree = "<group>"; };
 		9AB9B39C1E0969F100E3A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				9A2A16981E0A9750009350AB /* FBAnnotationClusteringSwift-Bridging-Header.h */,
 				9AB9B3A61E096A2100E3A112 /* Classes */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for FBAnnotationClusteringSwift */,
@@ -188,6 +193,15 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		9A2A16941E0A9718009350AB /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */,
+				9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */,
+			);
+			path = MapKit;
+			sourceTree = "<group>";
+		};
 		9AB9B39A1E0969F100E3A112 /* FBAnnotationClusteringSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +214,7 @@
 		9AB9B3A61E096A2100E3A112 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9A2A16941E0A9718009350AB /* MapKit */,
 				9AB9B3A71E096A2100E3A112 /* FBAnnotation.swift */,
 				9AB9B3A81E096A2100E3A112 /* FBAnnotationCluster.swift */,
 				9AB9B3A91E096A2100E3A112 /* FBAnnotationClusterTemplate.swift */,
@@ -370,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE1225941C6E312200A5E91D /* FBViewController.swift in Sources */,
+				9A2A16971E0A9718009350AB /* MKMapView+ZoomLevel.m in Sources */,
 				FE1225931C6E312200A5E91D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,6 +550,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.nikita.FBAnnotationClusteringSwift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FBAnnotationClusteringSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -551,6 +568,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.nikita.FBAnnotationClusteringSwift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FBAnnotationClusteringSwift-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

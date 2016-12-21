@@ -75,11 +75,9 @@ extension FBViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 
 		DispatchQueue.global(qos: .userInitiated).async {
-			let mapBoundsWidth = Double(self.mapView.bounds.size.width)
-			let mapRectWidth = self.mapView.visibleMapRect.size.width
-			let scale = mapBoundsWidth / mapRectWidth
-
-			let annotationArray = self.clusteringManager.clusteredAnnotations(withinMapRect: self.mapView.visibleMapRect, zoomScale:scale)
+            let annotationArray = self.clusteringManager.clusteredAnnotations(withinMapRect: self.mapView.visibleMapRect,
+                                                                              size: self.mapView.bounds.size,
+                                                                              zoomLevel:self.mapView.zoomLevel())
 
 			DispatchQueue.main.async {
 				self.clusteringManager.display(annotations: annotationArray, onMapView:self.mapView)
