@@ -33,7 +33,7 @@ public class FBClusteringManager {
 		}
     }
     
-    public init(animator: FBAnimator, maxClusteringZoomLevel: UInt = 11) {
+    public init(animator: FBAnimator, maxClusteringZoomLevel: UInt = 15) {
         self.animator = animator
         self.maxClusteringZoomLevel = maxClusteringZoomLevel
     }
