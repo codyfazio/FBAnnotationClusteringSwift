@@ -15,21 +15,21 @@ open class FBQuadTree {
 
 	// MARK: Internal functions
     
-    @discardableResult func insert(annotation: MKAnnotation) -> Bool {
+    @discardableResult func insert(annotation: FBAnnotation) -> Bool {
         return insert(annotation: annotation, toNode:rootNode)
     }
 
-    func enumerateAnnotations(inBox box: FBBoundingBox, callback: (MKAnnotation) -> Void) {
+    func enumerateAnnotations(inBox box: FBBoundingBox, callback: (FBAnnotation) -> Void) {
 		enumerateAnnotations(inBox: box, withNode:rootNode, callback: callback)
     }
     
-    func enumerateAnnotationsUsingBlock(_ callback: (MKAnnotation) -> Void) {
+    func enumerateAnnotationsUsingBlock(_ callback: (FBAnnotation) -> Void) {
 		enumerateAnnotations(inBox: FBBoundingBox(mapRect: MKMapRectWorld), withNode:rootNode, callback:callback)
     }
 
 	// MARK: Private functions
 
-	@discardableResult private func insert(annotation: MKAnnotation, toNode node: FBQuadTreeNode) -> Bool {
+	@discardableResult private func insert(annotation: FBAnnotation, toNode node: FBQuadTreeNode) -> Bool {
 		if !node.boundingBox.contains(coordinate: annotation.coordinate) {
 			return false
 		}
@@ -59,7 +59,7 @@ open class FBQuadTree {
 		return false
 	}
 
-    private func enumerateAnnotations(inBox box: FBBoundingBox, withNode node: FBQuadTreeNode, callback: (MKAnnotation) -> Void) {
+    private func enumerateAnnotations(inBox box: FBBoundingBox, withNode node: FBQuadTreeNode, callback: (FBAnnotation) -> Void) {
         if !node.boundingBox.intersects(box2: box) {
             return
         }

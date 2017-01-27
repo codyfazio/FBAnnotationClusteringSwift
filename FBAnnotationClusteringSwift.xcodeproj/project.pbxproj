@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		9A2A16971E0A9718009350AB /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */; };
+		9A2597D71E3A5A9B00170069 /* MKMapView+ZoomLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A2597D81E3A5AA800170069 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */; };
+		9A2597DB1E3B67CB00170069 /* FBAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597D91E3B673900170069 /* FBAnimator.swift */; };
+		9A2597DE1E3B680100170069 /* FBBounceAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */; };
+		9A2597E11E3B682100170069 /* FBSlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */; };
 		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
 		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -69,6 +73,9 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F27E8C19C5A405B5072D1D0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		8BFE2416CCF84B3F2AFDD15B /* FBAnnotationClusteringSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FBAnnotationClusteringSwift.podspec; path = ../FBAnnotationClusteringSwift.podspec; sourceTree = "<group>"; };
+		9A2597D91E3B673900170069 /* FBAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnimator.swift; sourceTree = "<group>"; };
+		9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBounceAnimator.swift; sourceTree = "<group>"; };
+		9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSlideAnimator.swift; sourceTree = "<group>"; };
 		9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		9A2A16981E0A9750009350AB /* FBAnnotationClusteringSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBAnnotationClusteringSwift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -226,6 +233,9 @@
 				9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */,
 				9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */,
 				9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */,
+				9A2597D91E3B673900170069 /* FBAnimator.swift */,
+				9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */,
+				9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -244,6 +254,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A2597D71E3A5A9B00170069 /* MKMapView+ZoomLevel.h in Headers */,
 				9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +396,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE1225941C6E312200A5E91D /* FBViewController.swift in Sources */,
-				9A2A16971E0A9718009350AB /* MKMapView+ZoomLevel.m in Sources */,
 				FE1225931C6E312200A5E91D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AB9B3C61E096A2900E3A112 /* FBQuadTreeNode.swift in Sources */,
+				9A2597D81E3A5AA800170069 /* MKMapView+ZoomLevel.m in Sources */,
 				9AB9B3C01E096A2900E3A112 /* FBAnnotationClusterView.swift in Sources */,
 				9AB9B3C11E096A2900E3A112 /* FBAnnotationClusterViewConfiguration.swift in Sources */,
 				9AB9B3C71E096A2900E3A112 /* FBZoomLevel.swift in Sources */,
@@ -411,6 +422,9 @@
 				9AB9B3BE1E096A2900E3A112 /* FBAnnotationCluster.swift in Sources */,
 				9AB9B3BF1E096A2900E3A112 /* FBAnnotationClusterTemplate.swift in Sources */,
 				9AB9B3C21E096A2900E3A112 /* FBBoundingBox+MapKit.swift in Sources */,
+				9A2597E11E3B682100170069 /* FBSlideAnimator.swift in Sources */,
+				9A2597DE1E3B680100170069 /* FBBounceAnimator.swift in Sources */,
+				9A2597DB1E3B67CB00170069 /* FBAnimator.swift in Sources */,
 				9AB9B3C41E096A2900E3A112 /* FBClusteringManager.swift in Sources */,
 				9AB9B3C51E096A2900E3A112 /* FBQuadTree.swift in Sources */,
 			);
@@ -550,7 +564,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.nikita.FBAnnotationClusteringSwift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FBAnnotationClusteringSwift-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -568,7 +582,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.nikita.FBAnnotationClusteringSwift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FBAnnotationClusteringSwift-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -631,6 +645,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -656,6 +671,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ngti.FBAnnotationClusteringSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

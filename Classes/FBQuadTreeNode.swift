@@ -14,7 +14,7 @@ open class FBQuadTreeNode {
 	static let NodeCapacity = 8
     
     let boundingBox: FBBoundingBox
-	private(set) var annotations: [MKAnnotation] = []
+	private(set) var annotations: [FBAnnotation] = []
 
     private(set) var northEast: FBQuadTreeNode?
     private(set) var northWest: FBQuadTreeNode?
@@ -33,7 +33,7 @@ open class FBQuadTreeNode {
 		return annotations.count < FBQuadTreeNode.NodeCapacity
 	}
 
-	func append(annotation: MKAnnotation) -> Bool {
+	func append(annotation: FBAnnotation) -> Bool {
 		if canAppendAnnotation() {
 			annotations.append(annotation)
 			return true

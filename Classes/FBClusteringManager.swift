@@ -17,7 +17,8 @@ public protocol FBClusteringManagerDelegate: NSObjectProtocol {
 public class FBClusteringManager {
 
     public weak var delegate: FBClusteringManagerDelegate? = nil
-
+    
+    public let animator: FBAnimator
 	private var backingTree: FBQuadTree?
 	private var tree: FBQuadTree? {
 		set {
@@ -29,44 +30,73 @@ public class FBClusteringManager {
 			}
 			return backingTree
 		}
-	}
-    private let lock = NSRecursiveLock()
-
-	public init() { }
-
-    public init(annotations: [MKAnnotation]) {
-        add(annotations: annotations)
     }
-
-	public func add(annotations:[MKAnnotation]){
-        lock.lock()
+    
+    public init(animator: FBAnimator) {
+        self.animator = animator
+    }
+    	
+	public func add(annotations:[FBAnnotation]) {
         for annotation in annotations {
 			tree?.insert(annotation: annotation)
         }
-        lock.unlock()
     }
 
 	public func removeAll() {
 		tree = nil
 	}
 
-	public func replace(annotations:[MKAnnotation]){
+	public func replace(annotations:[FBAnnotation]){
 		removeAll()
 		add(annotations: annotations)
 	}
 
-	public func allAnnotations() -> [MKAnnotation] {
-		var annotations = [MKAnnotation]()
-		lock.lock()
+	public func allAnnotations() -> [FBAnnotation] {
+		var annotations = [FBAnnotation]()
 		tree?.enumerateAnnotationsUsingBlock(){ obj in
 			annotations.append(obj)
 		}
-		lock.unlock()
 		return annotations
 	}
+    
+    private func gridAnnotation(from visibleAnnotations: [FBAnnotation], for gridMapRect:MKMapRect, allAnnotations: [FBAnnotation]) -> FBAnnotation?
+    {
+        // first, see if one of the annotations we were already showing is in this mapRect
+        
+        for annotation in allAnnotations
+        {
+            if let annotationForGridSet = visibleAnnotations.first(where: { annotation === $0 } )
+            {
+                return annotationForGridSet
+            }
+        }
+        
+        // otherwise, sort the annotations based on their distance from the center of the grid square,
+        // then choose the one closest to the center to show
+        let centerMapPoint = MKMapPointMake(MKMapRectGetMidX(gridMapRect), MKMapRectGetMidY(gridMapRect))
+        let sortedAnnotations = allAnnotations.sorted
+        {
+            (annotation1: FBAnnotation, annotation2: FBAnnotation) -> Bool in
+            
+            let mapPoint1 = MKMapPointForCoordinate(annotation1.actualCoordinate)
+            let mapPoint2 = MKMapPointForCoordinate(annotation2.actualCoordinate)
+            
+            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
+            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
+            
+            return (distance1 < distance2)
+        }
+        
+        return sortedAnnotations.first
+    }
 
-    public func clusteredAnnotations(withinMapRect rect:MKMapRect, size mapSize: CGSize, zoomLevel: ZoomLevel) -> [MKAnnotation] {
-        guard zoomLevel < UInt.max else { return [] }
+    public func updateAnnotations(in mapView: MKMapView)
+    {
+        let rect = mapView.visibleMapRect
+        let mapSize = mapView.bounds.size
+        let zoomLevel = mapView.zoomLevel()
+        
+        guard zoomLevel < UInt.max else { return }
         
         var cellSize = zoomLevel.cellSize()
         
@@ -84,10 +114,10 @@ public class FBClusteringManager {
         let minY = Int(floor(MKMapRectGetMinY(rect) * scaleFactor))
         let maxY = Int(floor(MKMapRectGetMaxY(rect) * scaleFactor))
         
-        var clusteredAnnotations = [MKAnnotation]()
+//        var clusteredAnnotations = [FBAnnotation]()
+//        var allAnnotations = self.allAnnotations()
         
-        lock.lock()
-        
+        // for each square in our grid, pick one annotation to show
         for i in minX...maxX {
             for j in minY...maxY {
 
@@ -96,60 +126,41 @@ public class FBClusteringManager {
                 let mapRect = MKMapRect(origin: mapPoint, size: mapSize)
                 let mapBox = FBBoundingBox(mapRect: mapRect)
                 
-                var totalLatitude: Double = 0
-                var totalLongitude: Double = 0
-                
-                var annotations = [MKAnnotation]()
-                
+                let visibleAnnotationsInBucket = Array(mapView.annotations(in: mapRect)) as! [FBAnnotation]
+                var allAnnotationsInBucket = [FBAnnotation]()
+
 				tree?.enumerateAnnotations(inBox: mapBox) { obj in
-                    totalLatitude += obj.coordinate.latitude
-                    totalLongitude += obj.coordinate.longitude
-                    annotations.append(obj)
+                    allAnnotationsInBucket.append(obj)
                 }
+                
+                if (allAnnotationsInBucket.count > 0)
+                {
+                    if let annotationForGrid = self.gridAnnotation(from: visibleAnnotationsInBucket, for: mapRect, allAnnotations: allAnnotationsInBucket),
+                        let annotationForGridIndex = allAnnotationsInBucket.index(of: annotationForGrid)
+                    {
+                        allAnnotationsInBucket.remove(at: annotationForGridIndex)
+                        mapView.removeAnnotation(annotationForGrid)
+                        
+                        // give the annotationForGrid a reference to all the annotations it will represent
+                        annotationForGrid.annotations = allAnnotationsInBucket
 
-				let count = annotations.count
+                        mapView.addAnnotation(annotationForGrid)
 
-				switch count {
-				case 0: break
-				case 1:
-					clusteredAnnotations += annotations
-				default:
-					let coordinate = CLLocationCoordinate2D(
-						latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
-						longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
-					)
-					let cluster = FBAnnotationCluster(coordinate: coordinate, title: nil, subtitle: nil, annotations: annotations)
-					clusteredAnnotations.append(cluster)
-				}
+                        for annotation in allAnnotationsInBucket
+                        {
+                            // give all the other annotations a reference to the one which is representing them
+                            annotation.annotations = []
+                            annotation.parentCluster = annotationForGrid
+                            
+                            // remove annotations which we've decided to cluster
+                            if let annotationView = mapView.view(for: annotation)
+                            {
+                                self.animator.hide(annotationView: annotationView, in: mapView)
+                            }
+                        }
+                    }
+                }
             }
         }
-        
-        lock.unlock()
-        
-        return clusteredAnnotations
-    }
-    
-    public func display(annotations: [MKAnnotation], onMapView mapView:MKMapView){
-		let before = NSMutableSet(array: mapView.annotations)
-		before.remove(mapView.userLocation)
-
-		let after = NSSet(array: annotations)
-
-		let toKeep = NSMutableSet(set: before)
-		toKeep.intersect(after as Set<NSObject>)
-
-		let toAdd = NSMutableSet(set: after)
-		toAdd.minus(toKeep as Set<NSObject>)
-
-		let toRemove = NSMutableSet(set: before)
-		toRemove.minus(after as Set<NSObject>)
-		
-		if let toAddAnnotations = toAdd.allObjects as? [MKAnnotation] {
-			mapView.addAnnotations(toAddAnnotations)
-		}
-		
-		if let removeAnnotations = toRemove.allObjects as? [MKAnnotation] {
-			mapView.removeAnnotations(removeAnnotations)
-		}
     }
 }
