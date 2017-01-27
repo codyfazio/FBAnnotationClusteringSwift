@@ -46,14 +46,6 @@ open class FBBounceAnimator: FBAnimator
             return
         }
         
-        guard let parentClusterCoordinate = annotation.parentCluster?.coordinate else
-        {
-            mapView.removeAnnotation(annotation)
-            return
-        }
-        
-        let actualCoordinate = annotation.coordinate
-        
         UIView.animate(withDuration: self.animatationDuration, animations:
         {
             annotationView.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)

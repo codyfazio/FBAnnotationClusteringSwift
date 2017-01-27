@@ -16,11 +16,11 @@ class FBViewController: UIViewController {
 
     let numberOfLocations = 50
     
-    let clusteringManager = FBClusteringManager(animator: FBBounceAnimator())
+    let clusteringManager = FBClusteringManager(animator: FBSlideAnimator())
     
     fileprivate lazy var configuration: FBAnnotationClusterViewConfiguration =
     {
-        let color = UIColor.green
+        let color = UIColor.blue
         
         var smallTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 0, upper: 6)), displayMode: .SolidColor(sideLength: 48, color: color))
         smallTemplate.borderWidth = 2
@@ -41,7 +41,7 @@ class FBViewController: UIViewController {
         super.viewDidLoad()
 
         clusteringManager.delegate = self;
-        clusteringManager.add(annotations: randomLocationsWithCount(numberOfLocations))
+        self.reloadData()
 
         mapView.centerCoordinate = CLLocationCoordinate2DMake(0, 0);
     }
@@ -157,5 +157,10 @@ extension FBViewController : MKMapViewDelegate {
                 default: ()
             }
         }
+    }
+    
+    @IBAction fileprivate func reloadData()
+    {
+        clusteringManager.replace(annotations: randomLocationsWithCount(numberOfLocations), in: mapView)
     }
 }

@@ -38,19 +38,35 @@ public class FBClusteringManager {
         self.maxClusteringZoomLevel = maxClusteringZoomLevel
     }
     	
-	public func add(annotations:[FBAnnotation]) {
+	public func add(annotations: [FBAnnotation], to mapView: MKMapView) {
         for annotation in annotations {
 			tree?.insert(annotation: annotation)
         }
+        
+        self.updateAnnotations(in: mapView)
     }
 
-	public func removeAll() {
+	public func removeAll(from mapView: MKMapView) {
+        let allAnnotations = self.allAnnotations()
+        
+        for annotation in allAnnotations
+        {
+            if let annotationView = mapView.view(for: annotation)
+            {
+                self.animator.hide(annotationView: annotationView, in: mapView)
+            }
+            else
+            {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+        
 		tree = nil
 	}
 
-	public func replace(annotations:[FBAnnotation]){
-		removeAll()
-		add(annotations: annotations)
+	public func replace(annotations:[FBAnnotation], in mapView: MKMapView){
+		removeAll(from: mapView)
+		add(annotations: annotations, to: mapView)
 	}
 
 	public func allAnnotations() -> [FBAnnotation] {
