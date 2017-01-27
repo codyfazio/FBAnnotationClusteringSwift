@@ -51,7 +51,7 @@ class FBViewController: UIViewController {
     func randomLocationsWithCount(_ count:Int) -> [FBAnnotation] {
         
         let center = CLLocationCoordinate2D(latitude: 51.925, longitude: 4.4737)
-        let span = Double(1)
+        let span = Double(0.2)
         var array:[FBAnnotation] = []
         for _ in 0...count - 1 {
             let randomCoordinate = CLLocationCoordinate2D(latitude: center.latitude + drand48() * span - span/2, longitude: center.longitude + drand48() * span - span/2 )

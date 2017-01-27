@@ -37,7 +37,7 @@ open class FBSlideAnimator: FBAnimator
         // animate the annotation from it's old container's coordinate, to its actual coordinate
         annotation.coordinate = clusterAnnotation.coordinate
         
-        UIView.animate(withDuration: 0.2)
+        UIView.animate(withDuration: self.animatationDuration)
         {
             annotation.coordinate = annotation.actualCoordinate
         }
@@ -58,7 +58,7 @@ open class FBSlideAnimator: FBAnimator
         
         let actualCoordinate = annotation.coordinate
             
-        UIView.animate(withDuration: 0.2, animations:
+        UIView.animate(withDuration: self.animatationDuration, animations:
         {
             annotation.coordinate = parentClusterCoordinate
         }, completion:
