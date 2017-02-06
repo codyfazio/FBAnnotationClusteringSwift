@@ -19,6 +19,8 @@ open class FBSlideAnimator: FBAnimator
     
     open func animateShow(annotationView: MKAnnotationView, in mapView: MKMapView)
     {
+        annotationView.alpha = 1
+        
         guard let annotation = annotationView.annotation as? FBAnnotation else
         {
             return
@@ -64,6 +66,7 @@ open class FBSlideAnimator: FBAnimator
         UIView.animate(withDuration: self.animatationDuration, animations:
         {
             annotation.coordinate = parentClusterCoordinate
+            annotationView.alpha = 0
         }, completion:
         {
             (finished: Bool) in
