@@ -26,6 +26,8 @@ open class FBSlideAnimator: FBAnimator
         
         guard let clusterAnnotation = annotation.parentCluster else
         {
+            annotation.coordinate = (annotation.annotations.count > 0) ? annotation.clusterCoordinate : annotation.actualCoordinate
+            annotationView.layer.zPosition = CGFloat(annotation.annotations.count)
             return
         }
         
@@ -39,7 +41,8 @@ open class FBSlideAnimator: FBAnimator
         
         UIView.animate(withDuration: self.animatationDuration)
         {
-            annotation.coordinate = annotation.actualCoordinate
+            annotation.coordinate = (annotation.annotations.count > 0) ? annotation.clusterCoordinate : annotation.actualCoordinate
+            annotationView.layer.zPosition = CGFloat(annotation.annotations.count)
         }
     }
     
@@ -50,7 +53,7 @@ open class FBSlideAnimator: FBAnimator
             return
         }
         
-        guard let parentClusterCoordinate = annotation.parentCluster?.coordinate else
+        guard let parentClusterCoordinate = annotation.parentCluster?.clusterCoordinate else
         {
             mapView.removeAnnotation(annotation)
             return

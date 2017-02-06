@@ -13,6 +13,7 @@ import MapKit
 open class FBAnnotation: MKPointAnnotation
 {
     private (set) open var actualCoordinate: CLLocationCoordinate2D
+    private (set) open var clusterCoordinate: CLLocationCoordinate2D
     
     open var parentCluster: FBAnnotation?
     
@@ -33,14 +34,15 @@ open class FBAnnotation: MKPointAnnotation
                 totalLongitude += annotation.actualCoordinate.longitude
             }
             
-            self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(allAnnotations.count),
-                                                     longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(allAnnotations.count))
+            self.clusterCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(allAnnotations.count),
+                                                            longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(allAnnotations.count))
         }
     }
     
     public required init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?)
     {
         self.actualCoordinate = coordinate
+        self.clusterCoordinate = coordinate
         
         super.init()
         

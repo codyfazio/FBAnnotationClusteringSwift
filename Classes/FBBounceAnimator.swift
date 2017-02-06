@@ -24,7 +24,7 @@ open class FBBounceAnimator: FBAnimator
             return
         }
         
-        annotation.coordinate = annotation.actualCoordinate
+        annotation.coordinate = (annotation.annotations.count > 0) ? annotation.clusterCoordinate : annotation.actualCoordinate
         
         // since it's displayed on the map, it is no longer contained by another annotation,
         // (We couldn't reset this in -updateVisibleAnnotations because we needed the reference to it here
