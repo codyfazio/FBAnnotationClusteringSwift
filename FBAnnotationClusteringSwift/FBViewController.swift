@@ -24,15 +24,15 @@ class FBViewController: UIViewController {
         
         var smallTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 0, upper: 6)), displayMode: .SolidColor(sideLength: 48, color: color))
         smallTemplate.borderWidth = 2
-        smallTemplate.fontSize = 13
+        smallTemplate.font = UIFont.boldSystemFont(ofSize: 13)
         
         var mediumTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 6, upper: 15)), displayMode: .SolidColor(sideLength: 56, color: color))
         mediumTemplate.borderWidth = 3
-        mediumTemplate.fontSize = 13
+        mediumTemplate.font = UIFont.boldSystemFont(ofSize: 13)
         
         var largeTemplate = FBAnnotationClusterTemplate(range: nil, displayMode: .SolidColor(sideLength: 64, color: color))
         largeTemplate.borderWidth = 4
-        largeTemplate.fontSize = 13
+        largeTemplate.font = UIFont.boldSystemFont(ofSize: 13)
         
         return FBAnnotationClusterViewConfiguration(templates: [smallTemplate, mediumTemplate], defaultTemplate: largeTemplate)
     }()

@@ -20,16 +20,7 @@ public struct FBAnnotationClusterTemplate {
 
 	public var borderWidth: CGFloat = 0
 
-	public var fontSize: CGFloat = 15
-	public var fontName: String?
-
-	public var font: UIFont? {
-		if let fontName = fontName {
-			return UIFont(name: fontName, size: fontSize)
-		} else {
-			return UIFont.boldSystemFont(ofSize: fontSize)
-		}
-	}
+	public var font = UIFont.boldSystemFont(ofSize: 13)
 
 	public init(range: Range<Int>?, displayMode: FBAnnotationClusterDisplayMode) {
 		self.range = range

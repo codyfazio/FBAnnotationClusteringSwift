@@ -21,15 +21,15 @@ public struct FBAnnotationClusterViewConfiguration {
 	public static func `default`() -> FBAnnotationClusterViewConfiguration {
 		var smallTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 0, upper: 6)), sideLength: 30)
 		smallTemplate.borderWidth = 3
-		smallTemplate.fontSize = 13
+		smallTemplate.font = UIFont.boldSystemFont(ofSize: 13)
 
 		var mediumTemplate = FBAnnotationClusterTemplate(range: Range(uncheckedBounds: (lower: 6, upper: 15)), sideLength: 40)
 		mediumTemplate.borderWidth = 4
-		mediumTemplate.fontSize = 14
+		mediumTemplate.font = UIFont.boldSystemFont(ofSize: 14)
 
 		var largeTemplate = FBAnnotationClusterTemplate(range: nil, sideLength: 50)
 		largeTemplate.borderWidth = 5
-		largeTemplate.fontSize = 15
+		largeTemplate.font = UIFont.boldSystemFont(ofSize: 15)
 
 		return FBAnnotationClusterViewConfiguration(templates: [smallTemplate, mediumTemplate], defaultTemplate: largeTemplate)
 	}
