@@ -123,13 +123,12 @@ public class FBClusteringManager {
         let scale = (Double(mapViewSize.width) / rect.size.width).roundTo(places: 1)
         
         let scaleFactor = scale/Double(cellSize)
+        let step = ceil(1.0/scaleFactor)
         
-        let minX = Int(floor(MKMapRectGetMinX(rect) * scaleFactor))
-        let maxX = Int(floor(MKMapRectGetMaxX(rect) * scaleFactor))
-        let minY = Int(floor(MKMapRectGetMinY(rect) * scaleFactor))
-        let maxY = Int(floor(MKMapRectGetMaxY(rect) * scaleFactor))
-        
-        let mapSize = MKMapSize(width: 1.0 / scaleFactor, height: 1.0 / scaleFactor)
+        let minX = Int(MKMapRectGetMinX(rect).floorTo(alignment: step))
+        let maxX = Int(MKMapRectGetMaxX(rect).ceilTo(alignment: step))
+        let minY = Int(MKMapRectGetMinY(rect).floorTo(alignment: step))
+        let maxY = Int(MKMapRectGetMaxY(rect).ceilTo(alignment: step))
         
         let visibleAnnotationsInBucket = self.annotations(of: FBAnnotation.self, in: mapView, for: rect)
         var visibleAnnotations = [FBAnnotation]()
@@ -173,19 +172,18 @@ public class FBClusteringManager {
         
         print("minX:\(minX) |maxX:\(maxX) |minY:\(minY) |maxY: \(maxY) |scale:\(scale)")
         
-        
-        
         // for each square in our grid, pick one annotation to show
-        for i in minX...maxX {
-            for j in minY...maxY {
-
-                let mapPoint = MKMapPoint(x: Double(i) / scaleFactor, y: Double(j) / scaleFactor)
-                let mapRect = MKMapRect(origin: mapPoint, size: mapSize)
+        for x in stride(from: minX, through: maxX, by: Int(step))
+        {
+            for y in stride(from: minY, through: maxY, by: Int(step))
+            {
+                let mapPoint = MKMapPoint(x: Double(x), y: Double(y))
+                let mapRect = MKMapRect(origin: mapPoint, size: MKMapSize(width: step, height: step))
                 let mapBox = FBBoundingBox(mapRect: mapRect)
                 
                 var allAnnotationsInBucket = [FBAnnotation]()
-
-				tree?.enumerateAnnotations(inBox: mapBox) { obj in
+                
+                tree?.enumerateAnnotations(inBox: mapBox) { obj in
                     allAnnotationsInBucket.append(obj)
                 }
                 
@@ -201,9 +199,9 @@ public class FBClusteringManager {
                         
                         // give the annotationForGrid a reference to all the annotations it will represent
                         annotationForGrid.annotations = allAnnotationsInBucket
-
+                        
                         mapView.addAnnotation(annotationForGrid)
-
+                        
                         for annotation in allAnnotationsInBucket
                         {
                             // give all the other annotations a reference to the one which is representing them
