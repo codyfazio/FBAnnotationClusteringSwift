@@ -80,7 +80,6 @@ public class FBClusteringManager {
     private func gridAnnotation(from visibleAnnotations: [FBAnnotation], for gridMapRect:MKMapRect, allAnnotations: [FBAnnotation]) -> FBAnnotation?
     {
         // first, see if one of the annotations we were already showing is in this mapRect
-        
         for annotation in allAnnotations
         {
             if let annotationForGridSet = visibleAnnotations.first(where: { annotation === $0 } )
@@ -89,23 +88,8 @@ public class FBClusteringManager {
             }
         }
         
-        // otherwise, sort the annotations based on their distance from the center of the grid square,
-        // then choose the one closest to the center to show
-        let centerMapPoint = MKMapPointMake(MKMapRectGetMidX(gridMapRect), MKMapRectGetMidY(gridMapRect))
-        let sortedAnnotations = allAnnotations.sorted
-        {
-            (annotation1: FBAnnotation, annotation2: FBAnnotation) -> Bool in
-            
-            let mapPoint1 = MKMapPointForCoordinate(annotation1.actualCoordinate)
-            let mapPoint2 = MKMapPointForCoordinate(annotation2.actualCoordinate)
-            
-            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
-            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
-            
-            return (distance1 < distance2)
-        }
-        
-        return sortedAnnotations.first
+        // otherwise, just get the first one
+        return allAnnotations.first
     }
     
     private func annotations<T: MKAnnotation>(of: T.Type, in mapView: MKMapView, for mapRect: MKMapRect) -> [T]
@@ -124,7 +108,7 @@ public class FBClusteringManager {
     public func updateAnnotations(in mapView: MKMapView)
     {
         let rect = mapView.visibleMapRect
-        let mapSize = mapView.bounds.size
+        let mapViewSize = mapView.bounds.size
         let zoomLevel = mapView.zoomLevel()
         
         guard zoomLevel < UInt.max else { return }
@@ -136,7 +120,7 @@ public class FBClusteringManager {
 			cellSize *= delegate.cellSizeFactor(forCoordinator: self)
         }
 
-        let scale = Double(mapSize.width) / rect.size.width
+        let scale = (Double(mapViewSize.width) / rect.size.width).roundTo(places: 1)
         
         let scaleFactor = scale/Double(cellSize)
         
@@ -145,16 +129,22 @@ public class FBClusteringManager {
         let minY = Int(floor(MKMapRectGetMinY(rect) * scaleFactor))
         let maxY = Int(floor(MKMapRectGetMaxY(rect) * scaleFactor))
         
+        let mapSize = MKMapSize(width: 1.0 / scaleFactor, height: 1.0 / scaleFactor)
+        
+        let visibleAnnotationsInBucket = self.annotations(of: FBAnnotation.self, in: mapView, for: rect)
+        var visibleAnnotations = [FBAnnotation]()
+        
         guard zoomLevel < self.maxClusteringZoomLevel else
         {
             let allMapBox = FBBoundingBox(mapRect: rect)
             
-            let visibleAnnotationsInBucket = self.annotations(of: FBAnnotation.self, in: mapView, for: rect)
             var allAnnotationsInBucket = [FBAnnotation]()
             
             tree?.enumerateAnnotations(inBox: allMapBox) { obj in
                 allAnnotationsInBucket.append(obj)
             }
+            
+            visibleAnnotations.append(contentsOf: allAnnotationsInBucket)
             
             for annotation in allAnnotationsInBucket
             {
@@ -177,24 +167,29 @@ public class FBClusteringManager {
                 mapView.addAnnotation(annotation)
             }
             
+            self.findAndResetAnnotationsOther(than: visibleAnnotations)
             return
         }
+        
+        print("minX:\(minX) |maxX:\(maxX) |minY:\(minY) |maxY: \(maxY) |scale:\(scale)")
+        
+        
         
         // for each square in our grid, pick one annotation to show
         for i in minX...maxX {
             for j in minY...maxY {
 
                 let mapPoint = MKMapPoint(x: Double(i) / scaleFactor, y: Double(j) / scaleFactor)
-                let mapSize = MKMapSize(width: 1.0 / scaleFactor, height: 1.0 / scaleFactor)
                 let mapRect = MKMapRect(origin: mapPoint, size: mapSize)
                 let mapBox = FBBoundingBox(mapRect: mapRect)
                 
-                let visibleAnnotationsInBucket = self.annotations(of: FBAnnotation.self, in: mapView, for: rect)
                 var allAnnotationsInBucket = [FBAnnotation]()
 
 				tree?.enumerateAnnotations(inBox: mapBox) { obj in
                     allAnnotationsInBucket.append(obj)
                 }
+                
+                visibleAnnotations.append(contentsOf: allAnnotationsInBucket)
                 
                 if (allAnnotationsInBucket.count > 0)
                 {
@@ -225,5 +220,19 @@ public class FBClusteringManager {
                 }
             }
         }
+        
+        self.findAndResetAnnotationsOther(than: visibleAnnotations)
+    }
+    
+    private func findAndResetAnnotationsOther(than annotations: [FBAnnotation])
+    {
+        var allAnnotations = Set<FBAnnotation>()
+        
+        tree?.enumerateAnnotationsUsingBlock { obj in
+            allAnnotations.insert(obj)
+        }
+        
+        let invisibleAnnotations = allAnnotations.subtracting(annotations)
+        invisibleAnnotations.forEach { $0.reset() }
     }
 }

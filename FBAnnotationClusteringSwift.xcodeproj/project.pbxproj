@@ -13,6 +13,7 @@
 		9A2597DB1E3B67CB00170069 /* FBAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597D91E3B673900170069 /* FBAnimator.swift */; };
 		9A2597DE1E3B680100170069 /* FBBounceAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */; };
 		9A2597E11E3B682100170069 /* FBSlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */; };
+		9AB5CFEB1E4A58980016CD07 /* FBUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */; };
 		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
 		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,6 +80,7 @@
 		9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
 		9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		9A2A16981E0A9750009350AB /* FBAnnotationClusteringSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBAnnotationClusteringSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUtils.swift; sourceTree = "<group>"; };
 		9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBAnnotationClusteringSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClusteringSwift.h; sourceTree = "<group>"; };
 		9AB9B39C1E0969F100E3A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				9A2597D91E3B673900170069 /* FBAnimator.swift */,
 				9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */,
 				9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */,
+				9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AB9B3C61E096A2900E3A112 /* FBQuadTreeNode.swift in Sources */,
+				9AB5CFEB1E4A58980016CD07 /* FBUtils.swift in Sources */,
 				9A2597D81E3A5AA800170069 /* MKMapView+ZoomLevel.m in Sources */,
 				9AB9B3C01E096A2900E3A112 /* FBAnnotationClusterView.swift in Sources */,
 				9AB9B3C11E096A2900E3A112 /* FBAnnotationClusterViewConfiguration.swift in Sources */,

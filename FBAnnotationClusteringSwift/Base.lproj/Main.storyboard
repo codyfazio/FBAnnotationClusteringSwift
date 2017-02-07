@@ -23,7 +23,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NBw-Tg-iYh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lHw-o7-Qge"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="SD6-lQ-h82"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEu-nc-yqg">

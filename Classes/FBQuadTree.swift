@@ -30,7 +30,7 @@ open class FBQuadTree {
 	// MARK: Private functions
 
 	@discardableResult private func insert(annotation: FBAnnotation, toNode node: FBQuadTreeNode) -> Bool {
-		if !node.boundingBox.contains(coordinate: annotation.coordinate) {
+		if !node.boundingBox.contains(coordinate: annotation.actualCoordinate) {
 			return false
 		}
 
@@ -65,7 +65,7 @@ open class FBQuadTree {
         }
 
         for annotation in node.annotations {
-            if box.contains(coordinate: annotation.coordinate) {
+            if box.contains(coordinate: annotation.actualCoordinate) {
                 callback(annotation)
             }
         }

@@ -71,4 +71,11 @@ open class FBAnnotation: MKPointAnnotation
         let span = MKCoordinateSpan(latitudeDelta: (maxLatitude - minLatitude), longitudeDelta: (maxLongutude - minLongutude))
         return MKCoordinateRegion(center: center, span: span)
     }
+    
+    func reset()
+    {
+        self.annotations = []
+        self.coordinate = self.actualCoordinate
+        self.parentCluster = nil
+    }
 }
