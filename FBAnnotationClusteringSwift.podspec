@@ -23,7 +23,7 @@ Swift translation of FB Annotation Clustering, which clusters pins on the map fo
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.source_files = 'Classes/**/*'
 	s.framework = 'MapKit'
   s.ios.framework = 'UIKit'
 end
