@@ -1,5 +1,5 @@
 //
-//  FBClusteringManager.swift
+//  FBQuadClusteringManager.swift
 //  FBAnnotationClusteringSwift
 //
 //  Created by Robert Chen on 4/2/15.
@@ -9,44 +9,49 @@
 import Foundation
 import MapKit
 
-public protocol FBClusteringManagerDelegate: NSObjectProtocol {
-    func cellSizeFactor(forCoordinator coordinator: FBClusteringManager) -> CGFloat
-    func cellSize(forCoordinator coordinator: FBClusteringManager, zoomLevel: ZoomLevel) -> CGFloat
-}
-
-public class FBClusteringManager {
-
-    public weak var delegate: FBClusteringManagerDelegate? = nil
-    
+public class FBQuadClusteringManager: FBClusteringManager
+{
+    public weak var delegate: FBClusteringManagerDelegate?
     public let animator: FBAnimator
     public let maxClusteringZoomLevel: UInt
+    
 	private var backingTree: FBQuadTree?
-	private var tree: FBQuadTree? {
-		set {
+	private var tree: FBQuadTree?
+    {
+		set
+        {
 			backingTree = newValue
 		}
-		get {
-			if backingTree == nil {
+        
+		get
+        {
+			if backingTree == nil
+            {
 				backingTree = FBQuadTree()
 			}
+            
 			return backingTree
 		}
     }
     
-    public init(animator: FBAnimator, maxClusteringZoomLevel: UInt = 15) {
+    public init(animator: FBAnimator, maxClusteringZoomLevel: UInt = 15)
+    {
         self.animator = animator
         self.maxClusteringZoomLevel = maxClusteringZoomLevel
     }
     	
-	public func add(annotations: [FBAnnotation], to mapView: MKMapView) {
-        for annotation in annotations {
+	public func add(annotations: [FBAnnotation], to mapView: MKMapView)
+    {
+        for annotation in annotations
+        {
 			tree?.insert(annotation: annotation)
         }
         
         self.updateAnnotations(in: mapView)
     }
 
-	public func removeAll(from mapView: MKMapView) {
+	public func removeAll(from mapView: MKMapView)
+    {
         let allAnnotations = self.allAnnotations()
         
         for annotation in allAnnotations
@@ -64,16 +69,15 @@ public class FBClusteringManager {
 		tree = nil
 	}
 
-	public func replace(annotations:[FBAnnotation], in mapView: MKMapView){
+	public func replace(annotations:[FBAnnotation], in mapView: MKMapView)
+    {
 		removeAll(from: mapView)
 		add(annotations: annotations, to: mapView)
 	}
 
-	public func allAnnotations() -> [FBAnnotation] {
-		var annotations = [FBAnnotation]()
-		tree?.enumerateAnnotationsUsingBlock(){ obj in
-			annotations.append(obj)
-		}
+	public func allAnnotations() -> [FBAnnotation]
+    {
+		let annotations = tree?.annotations() ?? []
 		return annotations
 	}
     
@@ -88,8 +92,23 @@ public class FBClusteringManager {
             }
         }
         
-        // otherwise, just get the first one
-        return allAnnotations.first
+        // otherwise, get the cluster with most of points
+        // then choose the one closest to the center to show
+        let centerMapPoint = MKMapPointMake(MKMapRectGetMidX(gridMapRect), MKMapRectGetMidY(gridMapRect))
+        let sortedAnnotations = allAnnotations.sorted
+        {
+            (annotation1: FBAnnotation, annotation2: FBAnnotation) -> Bool in
+            
+            let mapPoint1 = MKMapPointForCoordinate(annotation1.actualCoordinate)
+            let mapPoint2 = MKMapPointForCoordinate(annotation2.actualCoordinate)
+            
+            let distance1 = MKMetersBetweenMapPoints(mapPoint1, centerMapPoint)
+            let distance2 = MKMetersBetweenMapPoints(mapPoint2, centerMapPoint)
+            
+            return (distance1 < distance2)
+        }
+        
+        return sortedAnnotations.first
     }
     
     private func annotations<T: MKAnnotation>(of: T.Type, in mapView: MKMapView, for mapRect: MKMapRect) -> [T]
@@ -111,11 +130,15 @@ public class FBClusteringManager {
         let mapViewSize = mapView.bounds.size
         let zoomLevel = mapView.zoomLevel()
         
-        guard zoomLevel < UInt.max else { return }
+        guard zoomLevel < UInt.max else
+        {
+            return
+        }
         
         var cellSize = zoomLevel.cellSize()
         
-        if let delegate = delegate {
+        if let delegate = delegate
+        {
             cellSize = delegate.cellSize(forCoordinator: self, zoomLevel: zoomLevel)
 			cellSize *= delegate.cellSizeFactor(forCoordinator: self)
         }
@@ -125,25 +148,13 @@ public class FBClusteringManager {
         let scaleFactor = scale/Double(cellSize)
         let step = ceil(1.0/scaleFactor)
         
-        let minX = Int(MKMapRectGetMinX(rect).floorTo(alignment: step))
-        let maxX = Int(MKMapRectGetMaxX(rect).ceilTo(alignment: step))
-        let minY = Int(MKMapRectGetMinY(rect).floorTo(alignment: step))
-        let maxY = Int(MKMapRectGetMaxY(rect).ceilTo(alignment: step))
-        
         let visibleAnnotationsInBucket = self.annotations(of: FBAnnotation.self, in: mapView, for: rect)
-        var visibleAnnotations = [FBAnnotation]()
         
         guard zoomLevel < self.maxClusteringZoomLevel else
         {
             let allMapBox = FBBoundingBox(mapRect: rect)
             
-            var allAnnotationsInBucket = [FBAnnotation]()
-            
-            tree?.enumerateAnnotations(inBox: allMapBox) { obj in
-                allAnnotationsInBucket.append(obj)
-            }
-            
-            visibleAnnotations.append(contentsOf: allAnnotationsInBucket)
+            let allAnnotationsInBucket = tree?.annotations(inBox: allMapBox) ?? []
             
             for annotation in allAnnotationsInBucket
             {
@@ -166,11 +177,16 @@ public class FBClusteringManager {
                 mapView.addAnnotation(annotation)
             }
             
-            self.findAndResetAnnotationsOther(than: visibleAnnotations)
+            self.findAndResetAnnotationsOther(than: allAnnotationsInBucket)
             return
         }
         
-        print("minX:\(minX) |maxX:\(maxX) |minY:\(minY) |maxY: \(maxY) |scale:\(scale)")
+        let minX = Int(MKMapRectGetMinX(rect).floorTo(alignment: step))
+        let maxX = Int(MKMapRectGetMaxX(rect).ceilTo(alignment: step))
+        let minY = Int(MKMapRectGetMinY(rect).floorTo(alignment: step))
+        let maxY = Int(MKMapRectGetMaxY(rect).ceilTo(alignment: step))
+        
+        var visibleAnnotations = [FBAnnotation]()
         
         // for each square in our grid, pick one annotation to show
         for x in stride(from: minX, through: maxX, by: Int(step))
@@ -181,11 +197,7 @@ public class FBClusteringManager {
                 let mapRect = MKMapRect(origin: mapPoint, size: MKMapSize(width: step, height: step))
                 let mapBox = FBBoundingBox(mapRect: mapRect)
                 
-                var allAnnotationsInBucket = [FBAnnotation]()
-                
-                tree?.enumerateAnnotations(inBox: mapBox) { obj in
-                    allAnnotationsInBucket.append(obj)
-                }
+                var allAnnotationsInBucket = tree?.annotations(inBox: mapBox) ?? []
                 
                 visibleAnnotations.append(contentsOf: allAnnotationsInBucket)
                 
@@ -224,13 +236,10 @@ public class FBClusteringManager {
     
     private func findAndResetAnnotationsOther(than annotations: [FBAnnotation])
     {
-        var allAnnotations = Set<FBAnnotation>()
+        let allAnnotations = tree?.annotations() ?? []
+        let allAnnotationsSet = Set(allAnnotations)
         
-        tree?.enumerateAnnotationsUsingBlock { obj in
-            allAnnotations.insert(obj)
-        }
-        
-        let invisibleAnnotations = allAnnotations.subtracting(annotations)
+        let invisibleAnnotations = allAnnotationsSet.subtracting(annotations)
         invisibleAnnotations.forEach { $0.reset() }
     }
 }

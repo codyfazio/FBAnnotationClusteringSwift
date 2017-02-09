@@ -14,6 +14,11 @@
 		9A2597DE1E3B680100170069 /* FBBounceAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */; };
 		9A2597E11E3B682100170069 /* FBSlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */; };
 		9AB5CFEB1E4A58980016CD07 /* FBUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */; };
+		9AB5D0001E4C67940016CD07 /* FBAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5CFFE1E4C67380016CD07 /* FBAlgorithm.swift */; };
+		9AB5D00C1E4C79180016CD07 /* FBAdvancedClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5D0061E4C79140016CD07 /* FBAdvancedClusteringManager.swift */; };
+		9AB5D00D1E4C79180016CD07 /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5D0071E4C79140016CD07 /* FBClusteringManager.swift */; };
+		9AB5D00E1E4C79180016CD07 /* FBQuadClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5D0081E4C79140016CD07 /* FBQuadClusteringManager.swift */; };
+		9AB5D0111E4C9CDE0016CD07 /* MKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5D00F1E4C9C590016CD07 /* MKUtils.swift */; };
 		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
 		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -24,7 +29,6 @@
 		9AB9B3C11E096A2900E3A112 /* FBAnnotationClusterViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */; };
 		9AB9B3C21E096A2900E3A112 /* FBBoundingBox+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */; };
 		9AB9B3C31E096A2900E3A112 /* FBBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */; };
-		9AB9B3C41E096A2900E3A112 /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */; };
 		9AB9B3C51E096A2900E3A112 /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */; };
 		9AB9B3C61E096A2900E3A112 /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */; };
 		9AB9B3C71E096A2900E3A112 /* FBZoomLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */; };
@@ -81,6 +85,11 @@
 		9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		9A2A16981E0A9750009350AB /* FBAnnotationClusteringSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBAnnotationClusteringSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUtils.swift; sourceTree = "<group>"; };
+		9AB5CFFE1E4C67380016CD07 /* FBAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAlgorithm.swift; sourceTree = "<group>"; };
+		9AB5D0061E4C79140016CD07 /* FBAdvancedClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAdvancedClusteringManager.swift; sourceTree = "<group>"; };
+		9AB5D0071E4C79140016CD07 /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
+		9AB5D0081E4C79140016CD07 /* FBQuadClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadClusteringManager.swift; sourceTree = "<group>"; };
+		9AB5D00F1E4C9C590016CD07 /* MKUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUtils.swift; sourceTree = "<group>"; };
 		9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBAnnotationClusteringSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAnnotationClusteringSwift.h; sourceTree = "<group>"; };
 		9AB9B39C1E0969F100E3A112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,7 +100,6 @@
 		9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterViewConfiguration.swift; sourceTree = "<group>"; };
 		9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FBBoundingBox+MapKit.swift"; sourceTree = "<group>"; };
 		9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBoundingBox.swift; sourceTree = "<group>"; };
-		9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
 		9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
 		9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
 		9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBZoomLevel.swift; sourceTree = "<group>"; };
@@ -207,8 +215,19 @@
 			children = (
 				9A2A16951E0A9718009350AB /* MKMapView+ZoomLevel.h */,
 				9A2A16961E0A9718009350AB /* MKMapView+ZoomLevel.m */,
+				9AB5D00F1E4C9C590016CD07 /* MKUtils.swift */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		9AB5D0051E4C79140016CD07 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9AB5D0061E4C79140016CD07 /* FBAdvancedClusteringManager.swift */,
+				9AB5D0071E4C79140016CD07 /* FBClusteringManager.swift */,
+				9AB5D0081E4C79140016CD07 /* FBQuadClusteringManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		9AB9B39A1E0969F100E3A112 /* FBAnnotationClusteringSwift */ = {
@@ -223,6 +242,7 @@
 		9AB9B3A61E096A2100E3A112 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9AB5D0051E4C79140016CD07 /* Managers */,
 				9A2A16941E0A9718009350AB /* MapKit */,
 				9AB9B3A71E096A2100E3A112 /* FBAnnotation.swift */,
 				9AB9B3A81E096A2100E3A112 /* FBAnnotationCluster.swift */,
@@ -231,7 +251,6 @@
 				9AB9B3AB1E096A2100E3A112 /* FBAnnotationClusterViewConfiguration.swift */,
 				9AB9B3AC1E096A2100E3A112 /* FBBoundingBox+MapKit.swift */,
 				9AB9B3AD1E096A2100E3A112 /* FBBoundingBox.swift */,
-				9AB9B3AE1E096A2100E3A112 /* FBClusteringManager.swift */,
 				9AB9B3AF1E096A2100E3A112 /* FBQuadTree.swift */,
 				9AB9B3B01E096A2100E3A112 /* FBQuadTreeNode.swift */,
 				9AB9B3B11E096A2100E3A112 /* FBZoomLevel.swift */,
@@ -239,6 +258,7 @@
 				9A2597DC1E3B67E800170069 /* FBBounceAnimator.swift */,
 				9A2597DF1E3B681700170069 /* FBSlideAnimator.swift */,
 				9AB5CFE91E4A57D00016CD07 /* FBUtils.swift */,
+				9AB5CFFE1E4C67380016CD07 /* FBAlgorithm.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -423,14 +443,18 @@
 				9AB9B3C71E096A2900E3A112 /* FBZoomLevel.swift in Sources */,
 				9AB9B3C31E096A2900E3A112 /* FBBoundingBox.swift in Sources */,
 				9AB9B3BD1E096A2900E3A112 /* FBAnnotation.swift in Sources */,
+				9AB5D00E1E4C79180016CD07 /* FBQuadClusteringManager.swift in Sources */,
+				9AB5D0111E4C9CDE0016CD07 /* MKUtils.swift in Sources */,
 				9AB9B3BE1E096A2900E3A112 /* FBAnnotationCluster.swift in Sources */,
 				9AB9B3BF1E096A2900E3A112 /* FBAnnotationClusterTemplate.swift in Sources */,
 				9AB9B3C21E096A2900E3A112 /* FBBoundingBox+MapKit.swift in Sources */,
 				9A2597E11E3B682100170069 /* FBSlideAnimator.swift in Sources */,
+				9AB5D0001E4C67940016CD07 /* FBAlgorithm.swift in Sources */,
+				9AB5D00C1E4C79180016CD07 /* FBAdvancedClusteringManager.swift in Sources */,
 				9A2597DE1E3B680100170069 /* FBBounceAnimator.swift in Sources */,
 				9A2597DB1E3B67CB00170069 /* FBAnimator.swift in Sources */,
-				9AB9B3C41E096A2900E3A112 /* FBClusteringManager.swift in Sources */,
 				9AB9B3C51E096A2900E3A112 /* FBQuadTree.swift in Sources */,
+				9AB5D00D1E4C79180016CD07 /* FBClusteringManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ class FBViewController: UIViewController {
 
     let numberOfLocations = 50
     
-    let clusteringManager = FBClusteringManager(animator: FBSlideAnimator())
+    let clusteringManager = FBAdvancedClusteringManager(animator: FBSlideAnimator())
     
     fileprivate lazy var configuration: FBAnnotationClusterViewConfiguration =
     {

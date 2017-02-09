@@ -26,7 +26,17 @@ open class FBQuadTree {
     func enumerateAnnotationsUsingBlock(_ callback: (FBAnnotation) -> Void) {
 		enumerateAnnotations(inBox: FBBoundingBox(mapRect: MKMapRectWorld), withNode:rootNode, callback:callback)
     }
-
+    
+    func annotations(inBox box: FBBoundingBox = FBBoundingBox(mapRect: MKMapRectWorld)) -> [FBAnnotation] {
+        var annotations = [FBAnnotation]()
+        
+        self.enumerateAnnotations(inBox: box) { (obj) in
+            annotations.append(obj)
+        }
+        
+        return annotations
+    }
+    
 	// MARK: Private functions
 
 	@discardableResult private func insert(annotation: FBAnnotation, toNode node: FBQuadTreeNode) -> Bool {

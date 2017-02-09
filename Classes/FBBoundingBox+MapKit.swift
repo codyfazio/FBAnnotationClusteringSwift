@@ -11,18 +11,19 @@ import MapKit
 
 extension FBBoundingBox {
 
-	init(mapRect: MKMapRect) {
-		let topLeft = MKCoordinateForMapPoint(mapRect.origin)
-		let bottomRight = MKCoordinateForMapPoint(MKMapPointMake(MKMapRectGetMaxX(mapRect), MKMapRectGetMaxY(mapRect)))
-
-		let minLat = bottomRight.latitude
-		let maxLat = topLeft.latitude
-
-		let minLon = topLeft.longitude
-		let maxLon = bottomRight.longitude
-
-		self.init(x0: CGFloat(minLat), y0: CGFloat(minLon), xf: CGFloat(maxLat), yf: CGFloat(maxLon))
+    init(mapRect: MKMapRect) {
+        self.init(coordinateRegion: MKCoordinateRegionForMapRect(mapRect))
 	}
+    
+    init(coordinateRegion: MKCoordinateRegion) {
+        let minLat = coordinateRegion.center.latitude - coordinateRegion.span.latitudeDelta/2
+        let maxLat = coordinateRegion.center.latitude + coordinateRegion.span.latitudeDelta/2
+        
+        let minLon = coordinateRegion.center.longitude - coordinateRegion.span.longitudeDelta/2
+        let maxLon = coordinateRegion.center.longitude + coordinateRegion.span.longitudeDelta/2
+        
+        self.init(x0: CGFloat(minLat), y0: CGFloat(minLon), xf: CGFloat(maxLat), yf: CGFloat(maxLon))
+    }
 
 	func contains(coordinate: CLLocationCoordinate2D) -> Bool {
 		let containsX = (x0 <= CGFloat(coordinate.latitude)) && (CGFloat(coordinate.latitude) <= xf)
