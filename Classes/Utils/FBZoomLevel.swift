@@ -9,10 +9,11 @@
 import Foundation
 import MapKit
 
-public typealias ZoomLevel = UInt
+public typealias ZoomLevel = Double
+
 public extension ZoomLevel {
 	func cellSize() -> CGFloat {
-		switch (self) {
+		switch (UInt(self)) {
 		case 13...15:
 			return 64
 		case 16...18:

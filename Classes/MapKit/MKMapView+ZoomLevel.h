@@ -10,6 +10,6 @@
 + (MKCoordinateRegion)coordinateRegionWithPixelSize:(CGSize)pixelSize
                                    centerCoordinate:(CLLocationCoordinate2D)centerCoordinate
                                        andZoomLevel:(NSUInteger)zoomLevel;
-- (NSUInteger) zoomLevel;
+- (double) zoomLevel;
 
 @end

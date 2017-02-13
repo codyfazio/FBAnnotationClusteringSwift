@@ -14,9 +14,9 @@ class FBViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    let numberOfLocations = 50
+    let numberOfLocations = 5
     
-    let clusteringManager = FBAdvancedClusteringManager(animator: FBSlideAnimator())
+    let clusteringManager = FBClusteringManager(algorithm: FBDistanceBasedClusteringAlgorithm(), animator: FBSlideAnimator())
     
     fileprivate lazy var configuration: FBAnnotationClusterViewConfiguration =
     {
@@ -40,7 +40,7 @@ class FBViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        clusteringManager.delegate = self;
+        self.clusteringManager.delegate = self
         self.reloadData()
 
         mapView.centerCoordinate = CLLocationCoordinate2DMake(0, 0);
@@ -63,13 +63,15 @@ class FBViewController: UIViewController {
 
 }
 
-extension FBViewController : FBClusteringManagerDelegate {
- 
-    func cellSizeFactor(forCoordinator coordinator:FBClusteringManager) -> CGFloat {
-        return 1.5
+extension FBViewController : FBClusteringManagerDelegate
+{
+    func cellSizeFactor(for manager: FBClusteringManager) -> CGFloat
+    {
+        return 2
     }
     
-    func cellSize(forCoordinator coordinator: FBClusteringManager, zoomLevel: ZoomLevel) -> CGFloat {
+    func cellSize(for manager: FBClusteringManager, zoomLevel: ZoomLevel) -> CGFloat
+    {
         return 64
     }
 }
@@ -94,7 +96,7 @@ extension FBViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
     {
-        guard let annotation = view.annotation as? FBAnnotation, annotation.annotations.count > 0 else
+        guard let annotation = view.annotation as? FBAnnotationCluster else
         {
             return
         }
@@ -112,38 +114,35 @@ extension FBViewController : MKMapViewDelegate {
         
         var reuseId = ""
         
-        guard let annotation = annotation as? FBAnnotation else {
-            return nil
+        switch annotation
+        {
+            case _ as FBAnnotationCluster:
+                reuseId = "Cluster"
+                var clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+                if clusterView == nil {
+                    clusterView = FBAnnotationClusterView(annotation: annotation, reuseIdentifier: reuseId, configuration: self.configuration)
+                } else {
+                    clusterView?.annotation = annotation
+                }
+                
+                return clusterView
+            
+            case _ as FBAnnotation:
+                reuseId = "Pin"
+                var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+                if pinView == nil {
+                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                    pinView?.pinTintColor = UIColor.green
+                } else {
+                    pinView?.annotation = annotation
+                }
+                
+                return pinView
+            
+            default:
+                return nil
         }
-        
-        if annotation.annotations.count > 0 {
-            
-            reuseId = "Cluster"
-            var clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-			if clusterView == nil {
-				clusterView = FBAnnotationClusterView(annotation: annotation, reuseIdentifier: reuseId, configuration: self.configuration)
-			} else {
-				clusterView?.annotation = annotation
-			}
-
-            return clusterView
-            
-        } else {
-        
-            reuseId = "Pin"
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-			if pinView == nil {
-				pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-				pinView?.pinTintColor = UIColor.green
-			} else {
-				pinView?.annotation = annotation
-			}
-            
-            return pinView
-        }
-        
     }
-    
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView])
     {
@@ -151,8 +150,8 @@ extension FBViewController : MKMapViewDelegate {
         {
             switch (view.annotation)
             {
-                case _ as FBAnnotation:
-                    self.clusteringManager.animator.animateShow(annotationView: view, in: mapView)
+                case let annotation as FBBaseAnnotation:
+                    annotation.animate()
                 
                 default: ()
             }
