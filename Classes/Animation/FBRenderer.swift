@@ -19,7 +19,7 @@ protocol FBRendererDelegate: class
 
 class FBRenderer
 {
-    var animationDuration: TimeInterval = 0.5
+    private let animator: FBAnimator
     
     private var previousZoom = ZoomLevel(0)
     
@@ -36,6 +36,11 @@ class FBRenderer
     
     // Lookup map from cluster item to a new cluster.
     private var itemToNewClusterMap: [CLLocationCoordinate2D: FBAnnotationCluster] = [:]
+    
+    init(animator: FBAnimator)
+    {
+        self.animator = animator
+    }
     
     func render(annotations: [FBAnnotation], clusters: [FBAnnotationCluster], in mapView: MKMapView)
     {
@@ -127,7 +132,6 @@ class FBRenderer
             if (shouldShowCluster)
             {
                 self.render(cluster: cluster, in: mapView, animated: animated)
-                self.renderedClusters.append(cluster)
             }
         }
     }
@@ -153,7 +157,6 @@ class FBRenderer
                 if let oldCluster = self.itemToOldClusterMap[annotation.actualCoordinate], visibleMapRegion.contains(oldCluster.actualCoordinate)
                 {
                     shouldShowAnnotation = true
-                    break
                 }
                 
             }
@@ -161,46 +164,16 @@ class FBRenderer
             if (shouldShowAnnotation)
             {
                 self.render(annotation: annotation, in: mapView, animated: animated)
-                self.renderedAnnotations.append(annotation)
             }
         }
     }
     
     private func render(cluster: FBAnnotationCluster, in mapView: MKMapView, animated: Bool)
     {
-        var animated = animated
-        var fromPosition = kCLLocationCoordinate2DInvalid
-        
-        if (animated)
-        {
-            if let fromCluster = self.overlappingCluster(for: cluster, itemMap: self.itemToOldClusterMap)
-            {
-                fromPosition = fromCluster.actualCoordinate
-            }
-            else
-            {
-                animated = false
-            }
-        }
-        
-        cluster.coordinate = animated ? fromPosition: cluster.actualCoordinate
+        let fromCluster = animated ? self.overlappingCluster(for: cluster, itemMap: self.itemToOldClusterMap) : nil
         
         self.delegate?.renderer(self, willRender: cluster)
-        
-        if (animated)
-        {
-            cluster.animation = FBAnimation(duration: self.animationDuration, animation:
-            {
-                cluster.coordinate = cluster.actualCoordinate
-            }, completion: nil)
-        }
-        else
-        {
-            cluster.animation = nil
-        }
-        
-        mapView.addAnnotation(cluster)
-        
+        self.animator.show(cluster: cluster, from: fromCluster?.actualCoordinate, in: mapView, animated: animated)
         self.delegate?.renderer(self, didRender: cluster)
         
         self.renderedClusters.append(cluster)
@@ -208,39 +181,10 @@ class FBRenderer
         
     private func render(annotation: FBAnnotation, in mapView: MKMapView, animated: Bool)
     {
-        var animated = animated
-        var fromPosition = kCLLocationCoordinate2DInvalid
-        
-        if (animated)
-        {
-            if let fromCluster = self.itemToOldClusterMap[annotation.actualCoordinate]
-            {
-                fromPosition = fromCluster.actualCoordinate
-            }
-            else
-            {
-                animated = false
-            }
-        }
-        
-        annotation.coordinate = animated ? fromPosition: annotation.actualCoordinate
+        let fromCluster = animated ? self.itemToOldClusterMap[annotation.actualCoordinate] : nil
         
         self.delegate?.renderer(self, willRender: annotation)
-        
-        if (animated)
-        {
-            annotation.animation = FBAnimation(duration: self.animationDuration, animation:
-            {
-                annotation.coordinate = annotation.actualCoordinate
-            }, completion: nil)
-        }
-        else
-        {
-            annotation.animation = nil
-        }
-        
-        mapView.addAnnotation(annotation)
-        
+        self.animator.show(annotation: annotation, from: fromCluster?.actualCoordinate, in: mapView, animated: animated)
         self.delegate?.renderer(self, didRender: annotation)
         
         self.renderedAnnotations.append(annotation)
@@ -279,7 +223,7 @@ class FBRenderer
             
             // Find a candidate cluster to animate to.
             let toCluster = self.itemToNewClusterMap[annotation.actualCoordinate]
-            self.animateRemove(annotation: annotation, to: toCluster?.actualCoordinate, from: mapView)
+            self.animator.hide(annotation: annotation, to: toCluster?.actualCoordinate, in: mapView, animated: true)
         }
         
         for cluster in clusters
@@ -287,28 +231,7 @@ class FBRenderer
             // Find a candidate cluster to animate to.
             let toCluster = self.overlappingCluster(for: cluster, itemMap: self.itemToNewClusterMap)
             
-            self.animateRemove(annotation: cluster, to: toCluster?.actualCoordinate, from: mapView)
-        }
-    }
-    
-    private func animateRemove(annotation: FBBaseAnnotation, to coordinate: CLLocationCoordinate2D?, from mapView: MKMapView)
-    {
-        if let coordinate = coordinate
-        {
-            // All is good, perform the animation.
-            UIView.animate(withDuration: self.animationDuration, animations:
-            {
-                annotation.coordinate = coordinate
-            }, completion:
-            {
-                (finished: Bool) in
-                mapView.removeAnnotation(annotation)
-            })
-        }
-        else
-        {
-            // If there is not near by cluster to animate to, do not perform animation.
-            mapView.removeAnnotation(annotation)
+            self.animator.hide(cluster: cluster, to: toCluster?.actualCoordinate, in: mapView, animated: true)
         }
     }
     

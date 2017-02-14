@@ -8,17 +8,7 @@
 
 import UIKit
 
-public struct FBAnimation
-{
-    let duration: TimeInterval
-    let animation : (Void) -> Void
-    let completion : ((Bool) -> Void)?
-    
-    func perform()
-    {
-        UIView.animate(withDuration: self.duration, animations: self.animation, completion: self.completion)
-    }
-}
+typealias FBAnimation = (MKAnnotationView?) -> Void
 
 open class FBBaseAnnotation: MKPointAnnotation
 {
@@ -36,8 +26,8 @@ open class FBBaseAnnotation: MKPointAnnotation
         self.subtitle = subtitle
     }
     
-    public func animate()
+    public func animate(annotationView: MKAnnotationView?)
     {
-        self.animation?.perform()
+        self.animation?(annotationView)
     }
 }

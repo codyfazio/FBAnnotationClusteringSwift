@@ -10,8 +10,11 @@ import MapKit
 
 public protocol FBAnimator
 {
-    var animatationDuration: TimeInterval { get }
+    var animationDuration: TimeInterval { get }
     
-    func animateShow(annotationView: MKAnnotationView, in mapView: MKMapView)
-    func hide(annotationView: MKAnnotationView, in mapView: MKMapView)
+    func show(annotation: FBAnnotation, from coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    func show(cluster: FBAnnotationCluster, from coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    
+    func hide(annotation: FBAnnotation, to coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    func hide(cluster: FBAnnotationCluster, to coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
 }

@@ -14,7 +14,7 @@ class FBViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    let numberOfLocations = 5
+    let numberOfLocations = 10
     
     let clusteringManager = FBClusteringManager(algorithm: FBDistanceBasedClusteringAlgorithm(), animator: FBSlideAnimator())
     
@@ -151,7 +151,7 @@ extension FBViewController : MKMapViewDelegate {
             switch (view.annotation)
             {
                 case let annotation as FBBaseAnnotation:
-                    annotation.animate()
+                    annotation.animate(annotationView: view)
                 
                 default: ()
             }

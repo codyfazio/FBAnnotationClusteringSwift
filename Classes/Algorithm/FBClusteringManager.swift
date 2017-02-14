@@ -19,14 +19,13 @@ open class FBClusteringManager
 {
     public weak var delegate: FBClusteringManagerDelegate?
     public let algorithm: FBClusteringAlgorithm
-    public let animator: FBAnimator
     
-    let renderer = FBRenderer()
+    let renderer: FBRenderer
         
     public init(algorithm: FBClusteringAlgorithm, animator: FBAnimator)
     {
         self.algorithm = algorithm
-        self.animator = animator
+        self.renderer = FBRenderer(animator: animator)
         
         self.algorithm.delegate = self
     }

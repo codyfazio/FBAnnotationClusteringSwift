@@ -10,49 +10,118 @@ import UIKit
 
 open class FBBounceAnimator: FBAnimator
 {
-    public let animatationDuration: TimeInterval
+    public let animationDuration: TimeInterval
     
-    public init(animatationDuration: TimeInterval = 0.2)
+    public init(animationDuration: TimeInterval = 0.2)
     {
-        self.animatationDuration = animatationDuration
+        self.animationDuration = animationDuration
     }
     
-    open func animateShow(annotationView: MKAnnotationView, in mapView: MKMapView)
+    public func show(annotation: FBAnnotation, from _: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
     {
-//        guard let annotation = annotationView.annotation as? FBAnnotation else
-//        {
-//            return
-//        }
-//        
-//        annotation.coordinate = (annotation.annotations.count > 0) ? annotation.clusterCoordinate : annotation.actualCoordinate
-//        
-//        // since it's displayed on the map, it is no longer contained by another annotation,
-//        // (We couldn't reset this in -updateVisibleAnnotations because we needed the reference to it here
-//        // to get the containerCoordinate)
-//        annotation.parentCluster = nil
-//        
-//        annotationView.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
-//        
-//        UIView.animate(withDuration: self.animatationDuration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 2, options: [], animations:
-//        {
-//            annotationView.transform = CGAffineTransform(scaleX: 1, y: 1)
-//        }, completion: nil)
-    }
-    
-    open func hide(annotationView: MKAnnotationView, in mapView: MKMapView)
-    {
-        guard let annotation = annotationView.annotation as? FBAnnotation else
+        annotation.coordinate = annotation.actualCoordinate
+        
+        if (animated)
         {
-            return
+            annotation.animation =
+            {
+                (annotationView: MKAnnotationView?) in
+                
+                annotationView?.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
+                
+                UIView.animate(withDuration: self.animationDuration, animations:
+                {
+                    annotationView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
+            }
+        }
+        else
+        {
+            annotation.animation =
+            {
+                (annotationView: MKAnnotationView?) in
+                
+                annotationView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
         }
         
-        UIView.animate(withDuration: self.animatationDuration, animations:
+        mapView.addAnnotation(annotation)
+    }
+    
+    public func show(cluster: FBAnnotationCluster, from _: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    {
+        cluster.coordinate = cluster.actualCoordinate
+        
+        if (animated)
         {
-            annotationView.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
-        }, completion:
+            cluster.animation =
+            {
+                (annotationView: MKAnnotationView?) in
+                
+                annotationView?.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
+                
+                UIView.animate(withDuration: self.animationDuration, animations:
+                {
+                    annotationView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    annotationView?.layer.zPosition = CGFloat(cluster.annotations.count)
+                }, completion: nil)
+            }
+        }
+        else
         {
-            (finished: Bool) in
+            cluster.animation =
+            {
+                (annotationView: MKAnnotationView?) in
+                
+                annotationView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                annotationView?.layer.zPosition = CGFloat(cluster.annotations.count)
+            }
+        }
+        
+        mapView.addAnnotation(cluster)
+    }
+    
+    public func hide(annotation: FBAnnotation, to coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    {
+        if (animated)
+        {
+            let annotationView = mapView.view(for: annotation)
+            
+            // All is good, perform the animation.
+            UIView.animate(withDuration: self.animationDuration, animations:
+            {
+                annotationView?.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
+            }, completion:
+            {
+                (finished: Bool) in
+                mapView.removeAnnotation(annotation)
+            })
+        }
+        else
+        {
             mapView.removeAnnotation(annotation)
-        })
+        }
+    }
+    
+    public func hide(cluster: FBAnnotationCluster, to coordinate: CLLocationCoordinate2D?, in mapView: MKMapView, animated: Bool)
+    {
+        if (animated)
+        {
+            let annotationView = mapView.view(for: cluster)
+            
+            // All is good, perform the animation.
+            UIView.animate(withDuration: self.animationDuration, animations:
+            {
+                annotationView?.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
+            }, completion:
+            {
+                (finished: Bool) in
+                mapView.removeAnnotation(cluster)
+            })
+        }
+        else
+        {
+            mapView.removeAnnotation(cluster)
+        }
     }
 }

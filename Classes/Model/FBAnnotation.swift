@@ -13,9 +13,4 @@ import MapKit
 open class FBAnnotation: FBBaseAnnotation
 {
     open var parentCluster: FBAnnotationCluster?
-    
-//    public required init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?)
-//    {
-//        super.init(coordinate: coordinate, title: title, subtitle: subtitle)
-//    }
 }
