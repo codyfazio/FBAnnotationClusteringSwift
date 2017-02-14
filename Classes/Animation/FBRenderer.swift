@@ -17,11 +17,11 @@ protocol FBRendererDelegate: class
     func renderer(_ renderer: FBRenderer, didRender cluster: FBAnnotationCluster)
 }
 
-class FBRenderer
+open class FBRenderer
 {
     private let animator: FBAnimator
     
-    private var previousZoom = ZoomLevel(0)
+    var previousZoom = ZoomLevel(0)
     
     weak var delegate: FBRendererDelegate?
     
@@ -37,9 +37,14 @@ class FBRenderer
     // Lookup map from cluster item to a new cluster.
     private var itemToNewClusterMap: [CLLocationCoordinate2D: FBAnnotationCluster] = [:]
     
-    init(animator: FBAnimator)
+    public init(animator: FBAnimator)
     {
         self.animator = animator
+    }
+    
+    func shouldRedraw(mapView: MKMapView) -> Bool
+    {
+        return true
     }
     
     func render(annotations: [FBAnnotation], clusters: [FBAnnotationCluster], in mapView: MKMapView)

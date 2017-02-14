@@ -9,12 +9,6 @@
 import UIKit
 import MapKit
 
-public protocol FBClusteringAlgorithmDelegate: class
-{
-    func cellSizeFactor(for algorithm: FBClusteringAlgorithm) -> CGFloat
-    func cellSize(for algorithm: FBClusteringAlgorithm, zoomLevel: ZoomLevel) -> CGFloat
-}
-
 public enum FBClusteringAlgorithmResult
 {
     case annotations([FBAnnotation])
@@ -23,7 +17,6 @@ public enum FBClusteringAlgorithmResult
 
 public protocol FBClusteringAlgorithm
 {
-    weak var delegate: FBClusteringAlgorithmDelegate? { get set }
     var maxClusteringZoomLevel: ZoomLevel  { get set }
     
     func add(annotations: [FBAnnotation])
@@ -32,5 +25,5 @@ public protocol FBClusteringAlgorithm
     func allAnnotations() -> [FBAnnotation]
     func allAnnotations(for visibleMapRect: MKMapRect) -> [FBAnnotation]
 
-    func clusters(for visibleMapRect: MKMapRect, size: CGSize, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
+    func clusters(for visibleMapRect: MKMapRect, step: Double, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
 }

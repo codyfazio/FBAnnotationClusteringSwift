@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class FBDistanceBasedClusteringAlgorithm: FBBaseQuadTreeClusteringAlgorithm
+open class FBDistanceBasedClusteringAlgorithm: FBBaseQuadTreeClusteringAlgorithm
 {
-    override public func clusters(for visibleMapRect: MKMapRect, size: CGSize, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
+    override public func clusters(for visibleMapRect: MKMapRect, step: Double, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
     {
         let allAnnotationsInBucket = self.tree?.annotations(inBox: FBBoundingBox(mapRect: visibleMapRect)) ?? []
         
@@ -18,18 +18,6 @@ public class FBDistanceBasedClusteringAlgorithm: FBBaseQuadTreeClusteringAlgorit
         {
             return .annotations(allAnnotationsInBucket)
         }
-        
-        var cellSize = zoomLevel.cellSize()
-        
-        if let delegate = self.delegate
-        {
-            cellSize = delegate.cellSize(for: self, zoomLevel: zoomLevel)
-            cellSize *= delegate.cellSizeFactor(for: self)
-        }
-        
-        let scale = Double(size.width) / visibleMapRect.size.width
-        let scaleFactor = scale/Double(cellSize)
-        let step = ceil(1.0/scaleFactor)
         
         var processedItems = Set<FBAnnotation>()
         var itemToClusterDistanceMap = [CLLocationCoordinate2D: CLLocationDistance]()

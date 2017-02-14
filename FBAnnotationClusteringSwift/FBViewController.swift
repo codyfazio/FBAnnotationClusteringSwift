@@ -14,9 +14,13 @@ class FBViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    let numberOfLocations = 10
+    let numberOfLocations = 50
     
-    let clusteringManager = FBClusteringManager(algorithm: FBDistanceBasedClusteringAlgorithm(), animator: FBSlideAnimator())
+    lazy var clusteringManager: FBClusteringManager =
+    {
+        let renderer = FBAllMapRenderer(animator: FBSlideAnimator())
+        return FBClusteringManager(algorithm: FBAllMapDistanceBasedClusteringAlgorithm(), renderer: renderer)
+    }()
     
     fileprivate lazy var configuration: FBAnnotationClusterViewConfiguration =
     {
@@ -51,7 +55,7 @@ class FBViewController: UIViewController {
     func randomLocationsWithCount(_ count:Int) -> [FBAnnotation] {
         
         let center = CLLocationCoordinate2D(latitude: 51.925, longitude: 4.4737)
-        let span = Double(0.2)
+        let span = Double(0.01)
         var array:[FBAnnotation] = []
         for _ in 0...count - 1 {
             let randomCoordinate = CLLocationCoordinate2D(latitude: center.latitude + drand48() * span - span/2, longitude: center.longitude + drand48() * span - span/2 )

@@ -32,6 +32,8 @@
 		9A3C26761E51E75E00DCA6BD /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C266D1E51E75E00DCA6BD /* FBClusteringManager.swift */; };
 		9A3C26771E51E75E00DCA6BD /* FBDistanceBasedClusteringAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C266E1E51E75E00DCA6BD /* FBDistanceBasedClusteringAlgorithm.swift */; };
 		9A3C26781E51E75E00DCA6BD /* FBQuadClusteringAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C266F1E51E75E00DCA6BD /* FBQuadClusteringAlgorithm.swift */; };
+		9A9A9F8F1E538BF000DC3C06 /* FBAllMapRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A9F8E1E538BF000DC3C06 /* FBAllMapRenderer.swift */; };
+		9A9A9F911E538EA000DC3C06 /* FBAllMapDistanceBasedClusteringAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A9F901E538EA000DC3C06 /* FBAllMapDistanceBasedClusteringAlgorithm.swift */; };
 		9AB9B39D1E0969F100E3A112 /* FBAnnotationClusteringSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB9B39B1E0969F100E3A112 /* FBAnnotationClusteringSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB9B3A01E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; };
 		9AB9B3A11E0969F100E3A112 /* FBAnnotationClusteringSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB9B3991E0969F100E3A112 /* FBAnnotationClusteringSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -93,6 +95,8 @@
 		9A3C266D1E51E75E00DCA6BD /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
 		9A3C266E1E51E75E00DCA6BD /* FBDistanceBasedClusteringAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBDistanceBasedClusteringAlgorithm.swift; sourceTree = "<group>"; };
 		9A3C266F1E51E75E00DCA6BD /* FBQuadClusteringAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadClusteringAlgorithm.swift; sourceTree = "<group>"; };
+		9A9A9F8E1E538BF000DC3C06 /* FBAllMapRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAllMapRenderer.swift; sourceTree = "<group>"; };
+		9A9A9F901E538EA000DC3C06 /* FBAllMapDistanceBasedClusteringAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAllMapDistanceBasedClusteringAlgorithm.swift; sourceTree = "<group>"; };
 		9AB5D04F1E4CF3570016CD07 /* FBAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnimator.swift; sourceTree = "<group>"; };
 		9AB5D0501E4CF3570016CD07 /* FBBounceAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBounceAnimator.swift; sourceTree = "<group>"; };
 		9AB5D0511E4CF3570016CD07 /* FBSlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSlideAnimator.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				9A3C266C1E51E75E00DCA6BD /* FBClusteringAlgorithm.swift */,
 				9A3C266D1E51E75E00DCA6BD /* FBClusteringManager.swift */,
 				9A3C266E1E51E75E00DCA6BD /* FBDistanceBasedClusteringAlgorithm.swift */,
+				9A9A9F901E538EA000DC3C06 /* FBAllMapDistanceBasedClusteringAlgorithm.swift */,
 				9A3C266F1E51E75E00DCA6BD /* FBQuadClusteringAlgorithm.swift */,
 			);
 			path = Algorithm;
@@ -247,6 +252,7 @@
 				9AB5D0501E4CF3570016CD07 /* FBBounceAnimator.swift */,
 				9AB5D0511E4CF3570016CD07 /* FBSlideAnimator.swift */,
 				9A3C264D1E51B80500DCA6BD /* FBRenderer.swift */,
+				9A9A9F8E1E538BF000DC3C06 /* FBAllMapRenderer.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 				9A3C264A1E51AAB400DCA6BD /* FBAnnotationClusterViewConfiguration.swift in Sources */,
 				9A3C26731E51E75E00DCA6BD /* FBQuadTreeNode.swift in Sources */,
 				9A3C26431E51AAAC00DCA6BD /* FBAnimator.swift in Sources */,
+				9A9A9F8F1E538BF000DC3C06 /* FBAllMapRenderer.swift in Sources */,
 				9A3C26371E51AA7000DCA6BD /* MKMapView+ZoomLevel.m in Sources */,
 				9A3C26491E51AAB400DCA6BD /* FBAnnotationClusterView.swift in Sources */,
 				9A3C26711E51E75E00DCA6BD /* FBBoundingBox.swift in Sources */,
@@ -506,6 +513,7 @@
 				9A3C26771E51E75E00DCA6BD /* FBDistanceBasedClusteringAlgorithm.swift in Sources */,
 				9A3C264E1E51B80500DCA6BD /* FBRenderer.swift in Sources */,
 				9A3C264C1E51AABB00DCA6BD /* FBZoomLevel.swift in Sources */,
+				9A9A9F911E538EA000DC3C06 /* FBAllMapDistanceBasedClusteringAlgorithm.swift in Sources */,
 				9A3C26451E51AAAC00DCA6BD /* FBSlideAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

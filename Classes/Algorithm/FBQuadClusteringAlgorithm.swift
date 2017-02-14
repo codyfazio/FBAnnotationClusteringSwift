@@ -11,7 +11,7 @@ import MapKit
 
 public class FBQuadClusteringAlgorithm: FBBaseQuadTreeClusteringAlgorithm
 {
-    override public func clusters(for visibleMapRect: MKMapRect, size: CGSize, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
+    override public func clusters(for visibleMapRect: MKMapRect, step: Double, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
     {
         let allAnnotationsInBucket = self.tree?.annotations(inBox: FBBoundingBox(mapRect: visibleMapRect)) ?? []
         
@@ -19,18 +19,6 @@ public class FBQuadClusteringAlgorithm: FBBaseQuadTreeClusteringAlgorithm
         {
             return .annotations(allAnnotationsInBucket)
         }
-        
-        var cellSize = zoomLevel.cellSize()
-        
-        if let delegate = self.delegate
-        {
-            cellSize = delegate.cellSize(for: self, zoomLevel: zoomLevel)
-            cellSize *= delegate.cellSizeFactor(for: self)
-        }
-        
-        let scale = Double(size.width) / visibleMapRect.size.width
-        let scaleFactor = scale/Double(cellSize)
-        let step = ceil(1.0/scaleFactor)
         
         let minX = Int(MKMapRectGetMinX(visibleMapRect).floorTo(alignment: step))
         let maxX = Int(MKMapRectGetMaxX(visibleMapRect).ceilTo(alignment: step))

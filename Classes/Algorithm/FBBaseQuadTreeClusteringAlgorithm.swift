@@ -10,8 +10,7 @@ import UIKit
 
 open class FBBaseQuadTreeClusteringAlgorithm: FBClusteringAlgorithm
 {
-    public weak var delegate: FBClusteringAlgorithmDelegate?
-    public var maxClusteringZoomLevel: ZoomLevel = 15
+    public var maxClusteringZoomLevel: ZoomLevel = 16
     
     private var backingTree: FBQuadTree?
     var tree: FBQuadTree?
@@ -61,7 +60,7 @@ open class FBBaseQuadTreeClusteringAlgorithm: FBClusteringAlgorithm
         return annotations
     }
     
-    public func clusters(for visibleMapRect: MKMapRect, size: CGSize, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
+    public func clusters(for visibleMapRect: MKMapRect, step: Double, zoomLevel: ZoomLevel) -> FBClusteringAlgorithmResult
     {
         return .annotations(self.allAnnotations(for: visibleMapRect))
     }

@@ -22,26 +22,24 @@ open class FBClusteringManager
     
     let renderer: FBRenderer
         
-    public init(algorithm: FBClusteringAlgorithm, animator: FBAnimator)
+    public init(algorithm: FBClusteringAlgorithm, renderer: FBRenderer)
     {
         self.algorithm = algorithm
-        self.renderer = FBRenderer(animator: animator)
-        
-        self.algorithm.delegate = self
+        self.renderer = renderer
     }
     
 	public func add(annotations: [FBAnnotation], to mapView: MKMapView)
     {
         self.algorithm.add(annotations: annotations)
         
-        self.updateAnnotations(in: mapView)
+        self.updateAnnotations(in: mapView, force: true)
     }
 
 	public func removeAll(from mapView: MKMapView)
     {
         self.algorithm.clear()
         
-        self.updateAnnotations(in: mapView)
+        self.updateAnnotations(in: mapView, force: true)
     }
 
 	public func replace(annotations:[FBAnnotation], in mapView: MKMapView)
@@ -49,19 +47,41 @@ open class FBClusteringManager
         self.algorithm.clear()
         self.algorithm.add(annotations: annotations)
         
-        self.updateAnnotations(in: mapView)
+        self.updateAnnotations(in: mapView, force: true)
     }
     
     public func updateAnnotations(in mapView: MKMapView)
     {
+        self.updateAnnotations(in: mapView, force: false)
+    }
+    
+    private func updateAnnotations(in mapView: MKMapView, force: Bool)
+    {
+        guard (self.renderer.shouldRedraw(mapView: mapView) || force) else
+        {
+            return
+        }
+        
         let mapRect = mapView.visibleMapRect
         let mapSize = mapView.bounds.size
         let zoomLevel = mapView.zoomLevel()
         
+        var cellSize = zoomLevel.cellSize()
+        
+        if let delegate = self.delegate
+        {
+            cellSize = delegate.cellSize(for: self, zoomLevel: zoomLevel)
+            cellSize *= delegate.cellSizeFactor(for: self)
+        }
+        
+        let scale = Double(mapSize.width) / mapRect.size.width
+        let scaleFactor = scale/Double(cellSize)
+        let step = ceil(1.0/scaleFactor)
+        
         var annotations = [FBAnnotation]()
         var clusters = [FBAnnotationCluster]()
         
-        let result = self.algorithm.clusters(for: mapRect, size: mapSize, zoomLevel: zoomLevel)
+        let result = self.algorithm.clusters(for: mapRect, step: step, zoomLevel: zoomLevel)
         
         switch (result)
         {
@@ -85,18 +105,5 @@ open class FBClusteringManager
         }
         
         self.renderer.render(annotations: annotations, clusters: clusters, in: mapView)
-    }
-}
-
-extension FBClusteringManager: FBClusteringAlgorithmDelegate
-{
-    public func cellSizeFactor(for algorithm: FBClusteringAlgorithm) -> CGFloat
-    {
-        return self.delegate?.cellSizeFactor(for: self) ?? 1
-    }
-    
-    public func cellSize(for algorithm: FBClusteringAlgorithm, zoomLevel: ZoomLevel) -> CGFloat
-    {
-        return self.delegate?.cellSize(for: self, zoomLevel: zoomLevel) ?? zoomLevel.cellSize()
     }
 }
